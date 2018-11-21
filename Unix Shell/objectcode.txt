@@ -1,0 +1,2251 @@
+main.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <read_parse_line>:
+   0:	55                   	push   %rbp
+   1:	48 89 e5             	mov    %rsp,%rbp
+   4:	48 83 ec 20          	sub    $0x20,%rsp
+   8:	48 89 7d f8          	mov    %rdi,-0x8(%rbp)
+   c:	48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+  10:	48 89 55 e8          	mov    %rdx,-0x18(%rbp)
+  14:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  18:	48 89 c7             	mov    %rax,%rdi
+  1b:	b8 00 00 00 00       	mov    $0x0,%eax
+  20:	e8 00 00 00 00       	callq  25 <read_parse_line+0x25>
+  25:	48 8b 55 e8          	mov    -0x18(%rbp),%rdx
+  29:	48 8b 4d f0          	mov    -0x10(%rbp),%rcx
+  2d:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+  31:	48 89 ce             	mov    %rcx,%rsi
+  34:	48 89 c7             	mov    %rax,%rdi
+  37:	b8 00 00 00 00       	mov    $0x0,%eax
+  3c:	e8 00 00 00 00       	callq  41 <read_parse_line+0x41>
+  41:	b8 01 00 00 00       	mov    $0x1,%eax
+  46:	c9                   	leaveq 
+  47:	c3                   	retq   
+
+0000000000000048 <readline>:
+  48:	55                   	push   %rbp
+  49:	48 89 e5             	mov    %rsp,%rbp
+  4c:	48 83 ec 20          	sub    $0x20,%rsp
+  50:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+  54:	48 8b 15 00 00 00 00 	mov    0x0(%rip),%rdx        # 5b <readline+0x13>
+  5b:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  5f:	be 64 00 00 00       	mov    $0x64,%esi
+  64:	48 89 c7             	mov    %rax,%rdi
+  67:	e8 00 00 00 00       	callq  6c <readline+0x24>
+  6c:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+  70:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  74:	48 89 c7             	mov    %rax,%rdi
+  77:	b8 00 00 00 00       	mov    $0x0,%eax
+  7c:	e8 00 00 00 00       	callq  81 <readline+0x39>
+  81:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  85:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 8c <readline+0x44>
+  8c:	48 89 c7             	mov    %rax,%rdi
+  8f:	e8 00 00 00 00       	callq  94 <readline+0x4c>
+  94:	85 c0                	test   %eax,%eax
+  96:	74 07                	je     9f <readline+0x57>
+  98:	48 83 7d f8 00       	cmpq   $0x0,-0x8(%rbp)
+  9d:	75 16                	jne    b5 <readline+0x6d>
+  9f:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # a6 <readline+0x5e>
+  a6:	e8 00 00 00 00       	callq  ab <readline+0x63>
+  ab:	bf 00 00 00 00       	mov    $0x0,%edi
+  b0:	e8 00 00 00 00       	callq  b5 <readline+0x6d>
+  b5:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  b9:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # c0 <readline+0x78>
+  c0:	48 89 c7             	mov    %rax,%rdi
+  c3:	e8 00 00 00 00       	callq  c8 <readline+0x80>
+  c8:	85 c0                	test   %eax,%eax
+  ca:	75 09                	jne    d5 <readline+0x8d>
+  cc:	c6 05 00 00 00 00 01 	movb   $0x1,0x0(%rip)        # d3 <readline+0x8b>
+  d3:	eb 07                	jmp    dc <readline+0x94>
+  d5:	c6 05 00 00 00 00 00 	movb   $0x0,0x0(%rip)        # dc <readline+0x94>
+  dc:	90                   	nop
+  dd:	c9                   	leaveq 
+  de:	c3                   	retq   
+
+00000000000000df <remove_endofline>:
+  df:	55                   	push   %rbp
+  e0:	48 89 e5             	mov    %rsp,%rbp
+  e3:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+  e7:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)
+  ee:	eb 04                	jmp    f4 <remove_endofline+0x15>
+  f0:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)
+  f4:	8b 45 fc             	mov    -0x4(%rbp),%eax
+  f7:	48 63 d0             	movslq %eax,%rdx
+  fa:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+  fe:	48 01 d0             	add    %rdx,%rax
+ 101:	0f b6 00             	movzbl (%rax),%eax
+ 104:	3c 0a                	cmp    $0xa,%al
+ 106:	75 e8                	jne    f0 <remove_endofline+0x11>
+ 108:	8b 45 fc             	mov    -0x4(%rbp),%eax
+ 10b:	48 63 d0             	movslq %eax,%rdx
+ 10e:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 112:	48 01 d0             	add    %rdx,%rax
+ 115:	c6 00 00             	movb   $0x0,(%rax)
+ 118:	90                   	nop
+ 119:	5d                   	pop    %rbp
+ 11a:	c3                   	retq   
+
+000000000000011b <signalhandler>:
+ 11b:	55                   	push   %rbp
+ 11c:	48 89 e5             	mov    %rsp,%rbp
+ 11f:	48 81 ec 90 00 00 00 	sub    $0x90,%rsp
+ 126:	89 bd 7c ff ff ff    	mov    %edi,-0x84(%rbp)
+ 12c:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+ 133:	00 00 
+ 135:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ 139:	31 c0                	xor    %eax,%eax
+ 13b:	bf 00 00 00 00       	mov    $0x0,%edi
+ 140:	e8 00 00 00 00       	callq  145 <signalhandler+0x2a>
+ 145:	89 45 88             	mov    %eax,-0x78(%rbp)
+ 148:	8b 45 88             	mov    -0x78(%rbp),%eax
+ 14b:	89 45 8c             	mov    %eax,-0x74(%rbp)
+ 14e:	8b 55 8c             	mov    -0x74(%rbp),%edx
+ 151:	48 8d 45 90          	lea    -0x70(%rbp),%rax
+ 155:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 15c <signalhandler+0x41>
+ 15c:	48 89 c7             	mov    %rax,%rdi
+ 15f:	b8 00 00 00 00       	mov    $0x0,%eax
+ 164:	e8 00 00 00 00       	callq  169 <signalhandler+0x4e>
+ 169:	48 8d 45 90          	lea    -0x70(%rbp),%rax
+ 16d:	48 89 c7             	mov    %rax,%rdi
+ 170:	b8 00 00 00 00       	mov    $0x0,%eax
+ 175:	e8 00 00 00 00       	callq  17a <signalhandler+0x5f>
+ 17a:	90                   	nop
+ 17b:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ 17f:	64 48 33 04 25 28 00 	xor    %fs:0x28,%rax
+ 186:	00 00 
+ 188:	74 05                	je     18f <signalhandler+0x74>
+ 18a:	e8 00 00 00 00       	callq  18f <signalhandler+0x74>
+ 18f:	c9                   	leaveq 
+ 190:	c3                   	retq   
+
+0000000000000191 <processline>:
+ 191:	55                   	push   %rbp
+ 192:	48 89 e5             	mov    %rsp,%rbp
+ 195:	53                   	push   %rbx
+ 196:	48 83 ec 38          	sub    $0x38,%rsp
+ 19a:	48 89 7d d8          	mov    %rdi,-0x28(%rbp)
+ 19e:	48 89 75 d0          	mov    %rsi,-0x30(%rbp)
+ 1a2:	48 89 55 c8          	mov    %rdx,-0x38(%rbp)
+ 1a6:	c7 45 e8 00 00 00 00 	movl   $0x0,-0x18(%rbp)
+ 1ad:	c7 45 ec 01 00 00 00 	movl   $0x1,-0x14(%rbp)
+ 1b4:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ 1b7:	48 98                	cltq   
+ 1b9:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 1c0:	00 
+ 1c1:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 1c5:	48 8d 1c 02          	lea    (%rdx,%rax,1),%rbx
+ 1c9:	48 8b 45 d8          	mov    -0x28(%rbp),%rax
+ 1cd:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 1d4 <processline+0x43>
+ 1d4:	48 89 c7             	mov    %rax,%rdi
+ 1d7:	e8 00 00 00 00       	callq  1dc <processline+0x4b>
+ 1dc:	48 89 03             	mov    %rax,(%rbx)
+ 1df:	c7 05 00 00 00 00 00 	movl   $0x0,0x0(%rip)        # 1e9 <processline+0x58>
+ 1e6:	00 00 00 
+ 1e9:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ 1ec:	48 98                	cltq   
+ 1ee:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 1f5:	00 
+ 1f6:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 1fa:	48 01 d0             	add    %rdx,%rax
+ 1fd:	48 8b 00             	mov    (%rax),%rax
+ 200:	48 85 c0             	test   %rax,%rax
+ 203:	75 16                	jne    21b <processline+0x8a>
+ 205:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 20c <processline+0x7b>
+ 20c:	e8 00 00 00 00       	callq  211 <processline+0x80>
+ 211:	b8 01 00 00 00       	mov    $0x1,%eax
+ 216:	e9 45 01 00 00       	jmpq   360 <processline+0x1cf>
+ 21b:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ 21e:	48 98                	cltq   
+ 220:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 227:	00 
+ 228:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 22c:	48 01 d0             	add    %rdx,%rax
+ 22f:	8b 55 e8             	mov    -0x18(%rbp),%edx
+ 232:	48 63 d2             	movslq %edx,%rdx
+ 235:	48 8d 0c d5 00 00 00 	lea    0x0(,%rdx,8),%rcx
+ 23c:	00 
+ 23d:	48 8b 55 c8          	mov    -0x38(%rbp),%rdx
+ 241:	48 01 ca             	add    %rcx,%rdx
+ 244:	48 8b 00             	mov    (%rax),%rax
+ 247:	48 89 02             	mov    %rax,(%rdx)
+ 24a:	eb 6d                	jmp    2b9 <processline+0x128>
+ 24c:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ 24f:	48 98                	cltq   
+ 251:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 258:	00 
+ 259:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 25d:	48 01 d0             	add    %rdx,%rax
+ 260:	48 8b 00             	mov    (%rax),%rax
+ 263:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 26a <processline+0xd9>
+ 26a:	48 89 c7             	mov    %rax,%rdi
+ 26d:	e8 00 00 00 00       	callq  272 <processline+0xe1>
+ 272:	85 c0                	test   %eax,%eax
+ 274:	75 0c                	jne    282 <processline+0xf1>
+ 276:	c7 05 00 00 00 00 01 	movl   $0x1,0x0(%rip)        # 280 <processline+0xef>
+ 27d:	00 00 00 
+ 280:	eb 0a                	jmp    28c <processline+0xfb>
+ 282:	c7 05 00 00 00 00 00 	movl   $0x0,0x0(%rip)        # 28c <processline+0xfb>
+ 289:	00 00 00 
+ 28c:	83 45 e8 01          	addl   $0x1,-0x18(%rbp)
+ 290:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ 293:	48 98                	cltq   
+ 295:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 29c:	00 
+ 29d:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 2a1:	48 8d 1c 02          	lea    (%rdx,%rax,1),%rbx
+ 2a5:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 2ac <processline+0x11b>
+ 2ac:	bf 00 00 00 00       	mov    $0x0,%edi
+ 2b1:	e8 00 00 00 00       	callq  2b6 <processline+0x125>
+ 2b6:	48 89 03             	mov    %rax,(%rbx)
+ 2b9:	8b 45 e8             	mov    -0x18(%rbp),%eax
+ 2bc:	48 98                	cltq   
+ 2be:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 2c5:	00 
+ 2c6:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 2ca:	48 01 d0             	add    %rdx,%rax
+ 2cd:	48 8b 00             	mov    (%rax),%rax
+ 2d0:	48 85 c0             	test   %rax,%rax
+ 2d3:	0f 85 73 ff ff ff    	jne    24c <processline+0xbb>
+ 2d9:	c7 45 ec 00 00 00 00 	movl   $0x0,-0x14(%rbp)
+ 2e0:	eb 6e                	jmp    350 <processline+0x1bf>
+ 2e2:	8b 45 ec             	mov    -0x14(%rbp),%eax
+ 2e5:	48 98                	cltq   
+ 2e7:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 2ee:	00 
+ 2ef:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 2f3:	48 01 d0             	add    %rdx,%rax
+ 2f6:	48 8b 00             	mov    (%rax),%rax
+ 2f9:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 300 <processline+0x16f>
+ 300:	48 89 c7             	mov    %rax,%rdi
+ 303:	e8 00 00 00 00       	callq  308 <processline+0x177>
+ 308:	85 c0                	test   %eax,%eax
+ 30a:	74 4e                	je     35a <processline+0x1c9>
+ 30c:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 313 <processline+0x182>
+ 313:	bf 11 00 00 00       	mov    $0x11,%edi
+ 318:	e8 00 00 00 00       	callq  31d <processline+0x18c>
+ 31d:	8b 45 ec             	mov    -0x14(%rbp),%eax
+ 320:	48 98                	cltq   
+ 322:	48 8d 14 c5 00 00 00 	lea    0x0(,%rax,8),%rdx
+ 329:	00 
+ 32a:	48 8b 45 d0          	mov    -0x30(%rbp),%rax
+ 32e:	48 01 d0             	add    %rdx,%rax
+ 331:	8b 55 ec             	mov    -0x14(%rbp),%edx
+ 334:	48 63 d2             	movslq %edx,%rdx
+ 337:	48 8d 0c d5 00 00 00 	lea    0x0(,%rdx,8),%rcx
+ 33e:	00 
+ 33f:	48 8b 55 c8          	mov    -0x38(%rbp),%rdx
+ 343:	48 01 ca             	add    %rcx,%rdx
+ 346:	48 8b 00             	mov    (%rax),%rax
+ 349:	48 89 02             	mov    %rax,(%rdx)
+ 34c:	83 45 ec 01          	addl   $0x1,-0x14(%rbp)
+ 350:	8b 45 ec             	mov    -0x14(%rbp),%eax
+ 353:	3b 45 e8             	cmp    -0x18(%rbp),%eax
+ 356:	7c 8a                	jl     2e2 <processline+0x151>
+ 358:	eb 01                	jmp    35b <processline+0x1ca>
+ 35a:	90                   	nop
+ 35b:	b8 01 00 00 00       	mov    $0x1,%eax
+ 360:	48 83 c4 38          	add    $0x38,%rsp
+ 364:	5b                   	pop    %rbx
+ 365:	5d                   	pop    %rbp
+ 366:	c3                   	retq   
+
+0000000000000367 <Log>:
+ 367:	55                   	push   %rbp
+ 368:	48 89 e5             	mov    %rsp,%rbp
+ 36b:	48 83 ec 20          	sub    $0x20,%rsp
+ 36f:	48 89 7d e8          	mov    %rdi,-0x18(%rbp)
+ 373:	89 75 e4             	mov    %esi,-0x1c(%rbp)
+ 376:	0f b6 05 00 00 00 00 	movzbl 0x0(%rip),%eax        # 37d <Log+0x16>
+ 37d:	83 f0 01             	xor    $0x1,%eax
+ 380:	84 c0                	test   %al,%al
+ 382:	74 20                	je     3a4 <Log+0x3d>
+ 384:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 38b <Log+0x24>
+ 38b:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 392 <Log+0x2b>
+ 392:	e8 00 00 00 00       	callq  397 <Log+0x30>
+ 397:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ 39b:	c6 05 00 00 00 00 01 	movb   $0x1,0x0(%rip)        # 3a2 <Log+0x3b>
+ 3a2:	eb 17                	jmp    3bb <Log+0x54>
+ 3a4:	48 8d 35 00 00 00 00 	lea    0x0(%rip),%rsi        # 3ab <Log+0x44>
+ 3ab:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 3b2 <Log+0x4b>
+ 3b2:	e8 00 00 00 00       	callq  3b7 <Log+0x50>
+ 3b7:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ 3bb:	48 83 7d f8 00       	cmpq   $0x0,-0x8(%rbp)
+ 3c0:	75 14                	jne    3d6 <Log+0x6f>
+ 3c2:	0f b6 05 00 00 00 00 	movzbl 0x0(%rip),%eax        # 3c9 <Log+0x62>
+ 3c9:	84 c0                	test   %al,%al
+ 3cb:	74 3d                	je     40a <Log+0xa3>
+ 3cd:	c6 05 00 00 00 00 00 	movb   $0x0,0x0(%rip)        # 3d4 <Log+0x6d>
+ 3d4:	eb 34                	jmp    40a <Log+0xa3>
+ 3d6:	48 8b 55 f8          	mov    -0x8(%rbp),%rdx
+ 3da:	48 8b 45 e8          	mov    -0x18(%rbp),%rax
+ 3de:	48 89 d6             	mov    %rdx,%rsi
+ 3e1:	48 89 c7             	mov    %rax,%rdi
+ 3e4:	e8 00 00 00 00       	callq  3e9 <Log+0x82>
+ 3e9:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ 3ed:	48 89 c7             	mov    %rax,%rdi
+ 3f0:	e8 00 00 00 00       	callq  3f5 <Log+0x8e>
+ 3f5:	48 83 7d f8 00       	cmpq   $0x0,-0x8(%rbp)
+ 3fa:	74 0f                	je     40b <Log+0xa4>
+ 3fc:	48 8b 45 f8          	mov    -0x8(%rbp),%rax
+ 400:	48 89 c7             	mov    %rax,%rdi
+ 403:	e8 00 00 00 00       	callq  408 <Log+0xa1>
+ 408:	eb 01                	jmp    40b <Log+0xa4>
+ 40a:	90                   	nop
+ 40b:	c9                   	leaveq 
+ 40c:	c3                   	retq   
+
+000000000000040d <main>:
+ 40d:	55                   	push   %rbp
+ 40e:	48 89 e5             	mov    %rsp,%rbp
+ 411:	48 81 ec 40 01 00 00 	sub    $0x140,%rsp
+ 418:	89 bd cc fe ff ff    	mov    %edi,-0x134(%rbp)
+ 41e:	48 89 b5 c0 fe ff ff 	mov    %rsi,-0x140(%rbp)
+ 425:	64 48 8b 04 25 28 00 	mov    %fs:0x28,%rax
+ 42c:	00 00 
+ 42e:	48 89 45 f8          	mov    %rax,-0x8(%rbp)
+ 432:	31 c0                	xor    %eax,%eax
+ 434:	c7 85 d4 fe ff ff 00 	movl   $0x0,-0x12c(%rbp)
+ 43b:	00 00 00 
+ 43e:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 445 <main+0x38>
+ 445:	e8 00 00 00 00       	callq  44a <main+0x3d>
+ 44a:	48 89 85 e8 fe ff ff 	mov    %rax,-0x118(%rbp)
+ 451:	48 8b 85 e8 fe ff ff 	mov    -0x118(%rbp),%rax
+ 458:	48 89 c6             	mov    %rax,%rsi
+ 45b:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 462 <main+0x55>
+ 462:	b8 00 00 00 00       	mov    $0x0,%eax
+ 467:	e8 00 00 00 00       	callq  46c <main+0x5f>
+ 46c:	e9 41 01 00 00       	jmpq   5b2 <main+0x1a5>
+ 471:	8b 05 00 00 00 00    	mov    0x0(%rip),%eax        # 477 <main+0x6a>
+ 477:	83 f8 01             	cmp    $0x1,%eax
+ 47a:	0f 85 91 00 00 00    	jne    511 <main+0x104>
+ 480:	48 8b 85 e8 fe ff ff 	mov    -0x118(%rbp),%rax
+ 487:	48 89 c6             	mov    %rax,%rsi
+ 48a:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 491 <main+0x84>
+ 491:	b8 00 00 00 00       	mov    $0x0,%eax
+ 496:	e8 00 00 00 00       	callq  49b <main+0x8e>
+ 49b:	e8 00 00 00 00       	callq  4a0 <main+0x93>
+ 4a0:	89 85 e0 fe ff ff    	mov    %eax,-0x120(%rbp)
+ 4a6:	83 bd e0 fe ff ff 00 	cmpl   $0x0,-0x120(%rbp)
+ 4ad:	75 3f                	jne    4ee <main+0xe1>
+ 4af:	e8 00 00 00 00       	callq  4b4 <main+0xa7>
+ 4b4:	89 85 e4 fe ff ff    	mov    %eax,-0x11c(%rbp)
+ 4ba:	48 8b 85 40 ff ff ff 	mov    -0xc0(%rbp),%rax
+ 4c1:	48 8d 95 40 ff ff ff 	lea    -0xc0(%rbp),%rdx
+ 4c8:	48 89 d6             	mov    %rdx,%rsi
+ 4cb:	48 89 c7             	mov    %rax,%rdi
+ 4ce:	e8 00 00 00 00       	callq  4d3 <main+0xc6>
+ 4d3:	83 f8 ff             	cmp    $0xffffffff,%eax
+ 4d6:	75 0c                	jne    4e4 <main+0xd7>
+ 4d8:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 4df <main+0xd2>
+ 4df:	e8 00 00 00 00       	callq  4e4 <main+0xd7>
+ 4e4:	bf 01 00 00 00       	mov    $0x1,%edi
+ 4e9:	e8 00 00 00 00       	callq  4ee <main+0xe1>
+ 4ee:	83 bd e0 fe ff ff ff 	cmpl   $0xffffffff,-0x120(%rbp)
+ 4f5:	0f 85 b7 00 00 00    	jne    5b2 <main+0x1a5>
+ 4fb:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 502 <main+0xf5>
+ 502:	b8 00 00 00 00       	mov    $0x0,%eax
+ 507:	e8 00 00 00 00       	callq  50c <main+0xff>
+ 50c:	e9 cd 00 00 00       	jmpq   5de <main+0x1d1>
+ 511:	48 8b 85 e8 fe ff ff 	mov    -0x118(%rbp),%rax
+ 518:	48 89 c6             	mov    %rax,%rsi
+ 51b:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 522 <main+0x115>
+ 522:	b8 00 00 00 00       	mov    $0x0,%eax
+ 527:	e8 00 00 00 00       	callq  52c <main+0x11f>
+ 52c:	e8 00 00 00 00       	callq  531 <main+0x124>
+ 531:	89 85 d8 fe ff ff    	mov    %eax,-0x128(%rbp)
+ 537:	83 bd d8 fe ff ff 00 	cmpl   $0x0,-0x128(%rbp)
+ 53e:	75 3f                	jne    57f <main+0x172>
+ 540:	e8 00 00 00 00       	callq  545 <main+0x138>
+ 545:	89 85 dc fe ff ff    	mov    %eax,-0x124(%rbp)
+ 54b:	48 8b 85 40 ff ff ff 	mov    -0xc0(%rbp),%rax
+ 552:	48 8d 95 40 ff ff ff 	lea    -0xc0(%rbp),%rdx
+ 559:	48 89 d6             	mov    %rdx,%rsi
+ 55c:	48 89 c7             	mov    %rax,%rdi
+ 55f:	e8 00 00 00 00       	callq  564 <main+0x157>
+ 564:	83 f8 ff             	cmp    $0xffffffff,%eax
+ 567:	75 0c                	jne    575 <main+0x168>
+ 569:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 570 <main+0x163>
+ 570:	e8 00 00 00 00       	callq  575 <main+0x168>
+ 575:	bf 01 00 00 00       	mov    $0x1,%edi
+ 57a:	e8 00 00 00 00       	callq  57f <main+0x172>
+ 57f:	83 bd d8 fe ff ff ff 	cmpl   $0xffffffff,-0x128(%rbp)
+ 586:	75 13                	jne    59b <main+0x18e>
+ 588:	48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 58f <main+0x182>
+ 58f:	b8 00 00 00 00       	mov    $0x0,%eax
+ 594:	e8 00 00 00 00       	callq  599 <main+0x18c>
+ 599:	eb 43                	jmp    5de <main+0x1d1>
+ 59b:	8b 85 d8 fe ff ff    	mov    -0x128(%rbp),%eax
+ 5a1:	ba 00 00 00 00       	mov    $0x0,%edx
+ 5a6:	be 00 00 00 00       	mov    $0x0,%esi
+ 5ab:	89 c7                	mov    %eax,%edi
+ 5ad:	e8 00 00 00 00       	callq  5b2 <main+0x1a5>
+ 5b2:	48 8d 95 40 ff ff ff 	lea    -0xc0(%rbp),%rdx
+ 5b9:	48 8d 8d f0 fe ff ff 	lea    -0x110(%rbp),%rcx
+ 5c0:	48 8d 45 90          	lea    -0x70(%rbp),%rax
+ 5c4:	48 89 ce             	mov    %rcx,%rsi
+ 5c7:	48 89 c7             	mov    %rax,%rdi
+ 5ca:	e8 00 00 00 00       	callq  5cf <main+0x1c2>
+ 5cf:	85 c0                	test   %eax,%eax
+ 5d1:	0f 85 9a fe ff ff    	jne    471 <main+0x64>
+ 5d7:	b8 00 00 00 00       	mov    $0x0,%eax
+ 5dc:	eb 00                	jmp    5de <main+0x1d1>
+ 5de:	48 8b 4d f8          	mov    -0x8(%rbp),%rcx
+ 5e2:	64 48 33 0c 25 28 00 	xor    %fs:0x28,%rcx
+ 5e9:	00 00 
+ 5eb:	74 05                	je     5f2 <main+0x1e5>
+ 5ed:	e8 00 00 00 00       	callq  5f2 <main+0x1e5>
+ 5f2:	c9                   	leaveq 
+ 5f3:	c3                   	retq   
+
+Disassembly of section .bss:
+
+0000000000000000 <bg>:
+   0:	00 00                	add    %al,(%rax)
+	...
+
+0000000000000004 <cd>:
+	...
+
+0000000000000005 <LogCreated>:
+	...
+
+Disassembly of section .rodata:
+
+0000000000000000 <.rodata>:
+   0:	65 78 69             	gs js  6c <.rodata+0x6c>
+   3:	74 00                	je     5 <.rodata+0x5>
+   5:	0a 47 6f             	or     0x6f(%rdi),%al
+   8:	6f                   	outsl  %ds:(%rsi),(%dx)
+   9:	64 62                	fs (bad) 
+   b:	79 65                	jns    72 <.rodata+0x72>
+   d:	20 2e                	and    %ch,(%rsi)
+   f:	2e 00 63 64          	add    %ah,%cs:0x64(%rbx)
+  13:	00 43 68             	add    %al,0x68(%rbx)
+  16:	69 6c 64 20 50 69 64 	imul   $0x20646950,0x20(%rsp,%riz,2),%ebp
+  1d:	20 
+  1e:	25 64 20 77 61       	and    $0x61772064,%eax
+  23:	73 20                	jae    45 <.rodata+0x45>
+  25:	74 65                	je     8c <.rodata+0x8c>
+  27:	72 6d                	jb     96 <.rodata+0x96>
+  29:	69 6e 61 74 65 64 2e 	imul   $0x2e646574,0x61(%rsi),%ebp
+  30:	0a 00                	or     (%rax),%al
+  32:	20 00                	and    %al,(%rax)
+  34:	4e                   	rex.WRX
+  35:	4f 20 43 4f          	rex.WRXB and %r8b,0x4f(%r11)
+  39:	4d                   	rex.WRB
+  3a:	4d                   	rex.WRB
+  3b:	41                   	rex.B
+  3c:	4e                   	rex.WRX
+  3d:	44 00 26             	add    %r12b,(%rsi)
+  40:	00 77 00             	add    %dh,0x0(%rdi)
+  43:	78 2e                	js     73 <.rodata+0x73>
+  45:	6c                   	insb   (%dx),%es:(%rdi)
+  46:	6f                   	outsl  %ds:(%rsi),(%dx)
+  47:	67 00 61 00          	add    %ah,0x0(%ecx)
+  4b:	48                   	rex.W
+  4c:	4f                   	rex.WRXB
+  4d:	4d                   	rex.WRB
+  4e:	45 00 7a 69          	add    %r15b,0x69(%r10)
+  52:	79 61                	jns    b5 <readline+0x6d>
+  54:	64 40                	fs rex
+  56:	45 6c                	rex.RB insb (%dx),%es:(%rdi)
+  58:	62 61 6e 6e 61       	(bad)  {%k6}
+  5d:	2d 35 35 36 37       	sub    $0x37363535,%eax
+  62:	49 6e                	rex.WB outsb %ds:(%rsi),(%dx)
+  64:	73 70                	jae    d6 <readline+0x8e>
+  66:	69 72 6f 6e 20 25 73 	imul   $0x7325206e,0x6f(%rdx),%esi
+  6d:	3a 7e 24             	cmp    0x24(%rsi),%bh
+  70:	20 00                	and    %al,(%rax)
+  72:	00 00                	add    %al,(%rax)
+  74:	00 00                	add    %al,(%rax)
+  76:	00 00                	add    %al,(%rax)
+  78:	7a 69                	jp     e3 <remove_endofline+0x4>
+  7a:	79 61                	jns    dd <readline+0x95>
+  7c:	64 40                	fs rex
+  7e:	45 6c                	rex.RB insb (%dx),%es:(%rdi)
+  80:	62 61 6e 6e 61       	(bad)  {%k6}
+  85:	2d 35 35 36 37       	sub    $0x37363535,%eax
+  8a:	49 6e                	rex.WB outsb %ds:(%rsi),(%dx)
+  8c:	73 70                	jae    fe <remove_endofline+0x1f>
+  8e:	69 72 6f 6e 20 25 73 	imul   $0x7325206e,0x6f(%rdx),%esi
+  95:	3a 7e 24             	cmp    0x24(%rsi),%bh
+  98:	00 6c 73 68          	add    %ch,0x68(%rbx,%rsi,2)
+  9c:	00 0a                	add    %cl,(%rdx)
+  9e:	46 61                	rex.RX (bad) 
+  a0:	69 6c 65 64 20 66 6f 	imul   $0x726f6620,0x64(%rbp,%riz,2),%ebp
+  a7:	72 
+  a8:	6b 69 6e 67          	imul   $0x67,0x6e(%rcx),%ebp
+  ac:	20 63 68             	and    %ah,0x68(%rbx)
+  af:	69                   	.byte 0x69
+  b0:	6c                   	insb   (%dx),%es:(%rdi)
+  b1:	64                   	fs
+  b2:	2e                   	cs
+  b3:	2e                   	cs
+	...
+
+Disassembly of section .debug_info:
+
+0000000000000000 <.debug_info>:
+   0:	f2 06                	repnz (bad) 
+   2:	00 00                	add    %al,(%rax)
+   4:	04 00                	add    $0x0,%al
+   6:	00 00                	add    %al,(%rax)
+   8:	00 00                	add    %al,(%rax)
+   a:	08 01                	or     %al,(%rcx)
+   c:	00 00                	add    %al,(%rax)
+   e:	00 00                	add    %al,(%rax)
+  10:	0c 00                	or     $0x0,%al
+	...
+  1e:	00 00                	add    %al,(%rax)
+  20:	00 f4                	add    %dh,%ah
+  22:	05 00 00 00 00       	add    $0x0,%eax
+  27:	00 00                	add    %al,(%rax)
+  29:	00 00                	add    %al,(%rax)
+  2b:	00 00                	add    %al,(%rax)
+  2d:	02 00                	add    (%rax),%al
+  2f:	00 00                	add    %al,(%rax)
+  31:	00 02                	add    %al,(%rdx)
+  33:	d8 38                	fdivrs (%rax)
+  35:	00 00                	add    %al,(%rax)
+  37:	00 03                	add    %al,(%rbx)
+  39:	08 07                	or     %al,(%rdi)
+  3b:	00 00                	add    %al,(%rax)
+  3d:	00 00                	add    %al,(%rax)
+  3f:	03 01                	add    (%rcx),%eax
+  41:	08 00                	or     %al,(%rax)
+  43:	00 00                	add    %al,(%rax)
+  45:	00 03                	add    %al,(%rbx)
+  47:	02 07                	add    (%rdi),%al
+  49:	00 00                	add    %al,(%rax)
+  4b:	00 00                	add    %al,(%rax)
+  4d:	03 04 07             	add    (%rdi,%rax,1),%eax
+  50:	00 00                	add    %al,(%rax)
+  52:	00 00                	add    %al,(%rax)
+  54:	03 01                	add    (%rcx),%eax
+  56:	06                   	(bad)  
+  57:	00 00                	add    %al,(%rax)
+  59:	00 00                	add    %al,(%rax)
+  5b:	03 02                	add    (%rdx),%eax
+  5d:	05 00 00 00 00       	add    $0x0,%eax
+  62:	04 04                	add    $0x4,%al
+  64:	05 69 6e 74 00       	add    $0x746e69,%eax
+  69:	03 08                	add    (%rax),%ecx
+  6b:	05 00 00 00 00       	add    $0x0,%eax
+  70:	02 00                	add    (%rax),%al
+  72:	00 00                	add    %al,(%rax)
+  74:	00 03                	add    %al,(%rbx)
+  76:	8c 69 00             	mov    %gs,0x0(%rcx)
+  79:	00 00                	add    %al,(%rax)
+  7b:	02 00                	add    (%rax),%al
+  7d:	00 00                	add    %al,(%rax)
+  7f:	00 03                	add    %al,(%rbx)
+  81:	8d 69 00             	lea    0x0(%rcx),%ebp
+  84:	00 00                	add    %al,(%rax)
+  86:	02 00                	add    (%rax),%al
+  88:	00 00                	add    %al,(%rax)
+  8a:	00 03                	add    %al,(%rbx)
+  8c:	8e 62 00             	mov    0x0(%rdx),%fs
+  8f:	00 00                	add    %al,(%rax)
+  91:	05 08 06 08 99       	add    $0x99080608,%eax
+  96:	00 00                	add    %al,(%rax)
+  98:	00 03                	add    %al,(%rbx)
+  9a:	01 06                	add    %eax,(%rsi)
+  9c:	00 00                	add    %al,(%rax)
+  9e:	00 00                	add    %al,(%rax)
+  a0:	07                   	(bad)  
+  a1:	99                   	cltd   
+  a2:	00 00                	add    %al,(%rax)
+  a4:	00 08                	add    %cl,(%rax)
+  a6:	00 00                	add    %al,(%rax)
+  a8:	00 00                	add    %al,(%rax)
+  aa:	d8 04 f5 25 02 00 00 	fadds  0x225(,%rsi,8)
+  b1:	09 00                	or     %eax,(%rax)
+  b3:	00 00                	add    %al,(%rax)
+  b5:	00 04 f6             	add    %al,(%rsi,%rsi,8)
+  b8:	62                   	(bad)  
+  b9:	00 00                	add    %al,(%rax)
+  bb:	00 00                	add    %al,(%rax)
+  bd:	09 00                	or     %eax,(%rax)
+  bf:	00 00                	add    %al,(%rax)
+  c1:	00 04 fb             	add    %al,(%rbx,%rdi,8)
+  c4:	93                   	xchg   %eax,%ebx
+  c5:	00 00                	add    %al,(%rax)
+  c7:	00 08                	add    %cl,(%rax)
+  c9:	09 00                	or     %eax,(%rax)
+  cb:	00 00                	add    %al,(%rax)
+  cd:	00 04 fc             	add    %al,(%rsp,%rdi,8)
+  d0:	93                   	xchg   %eax,%ebx
+  d1:	00 00                	add    %al,(%rax)
+  d3:	00 10                	add    %dl,(%rax)
+  d5:	09 00                	or     %eax,(%rax)
+  d7:	00 00                	add    %al,(%rax)
+  d9:	00 04 fd 93 00 00 00 	add    %al,0x93(,%rdi,8)
+  e0:	18 09                	sbb    %cl,(%rcx)
+  e2:	00 00                	add    %al,(%rax)
+  e4:	00 00                	add    %al,(%rax)
+  e6:	04 fe                	add    $0xfe,%al
+  e8:	93                   	xchg   %eax,%ebx
+  e9:	00 00                	add    %al,(%rax)
+  eb:	00 20                	add    %ah,(%rax)
+  ed:	09 00                	or     %eax,(%rax)
+  ef:	00 00                	add    %al,(%rax)
+  f1:	00 04 ff             	add    %al,(%rdi,%rdi,8)
+  f4:	93                   	xchg   %eax,%ebx
+  f5:	00 00                	add    %al,(%rax)
+  f7:	00 28                	add    %ch,(%rax)
+  f9:	0a 00                	or     (%rax),%al
+  fb:	00 00                	add    %al,(%rax)
+  fd:	00 04 00             	add    %al,(%rax,%rax,1)
+ 100:	01 93 00 00 00 30    	add    %edx,0x30000000(%rbx)
+ 106:	0a 00                	or     (%rax),%al
+ 108:	00 00                	add    %al,(%rax)
+ 10a:	00 04 01             	add    %al,(%rcx,%rax,1)
+ 10d:	01 93 00 00 00 38    	add    %edx,0x38000000(%rbx)
+ 113:	0a 00                	or     (%rax),%al
+ 115:	00 00                	add    %al,(%rax)
+ 117:	00 04 02             	add    %al,(%rdx,%rax,1)
+ 11a:	01 93 00 00 00 40    	add    %edx,0x40000000(%rbx)
+ 120:	0a 00                	or     (%rax),%al
+ 122:	00 00                	add    %al,(%rax)
+ 124:	00 04 04             	add    %al,(%rsp,%rax,1)
+ 127:	01 93 00 00 00 48    	add    %edx,0x48000000(%rbx)
+ 12d:	0a 00                	or     (%rax),%al
+ 12f:	00 00                	add    %al,(%rax)
+ 131:	00 04 05 01 93 00 00 	add    %al,0x9301(,%rax,1)
+ 138:	00 50 0a             	add    %dl,0xa(%rax)
+ 13b:	00 00                	add    %al,(%rax)
+ 13d:	00 00                	add    %al,(%rax)
+ 13f:	04 06                	add    $0x6,%al
+ 141:	01 93 00 00 00 58    	add    %edx,0x58000000(%rbx)
+ 147:	0a 00                	or     (%rax),%al
+ 149:	00 00                	add    %al,(%rax)
+ 14b:	00 04 08             	add    %al,(%rax,%rcx,1)
+ 14e:	01 68 02             	add    %ebp,0x2(%rax)
+ 151:	00 00                	add    %al,(%rax)
+ 153:	60                   	(bad)  
+ 154:	0a 00                	or     (%rax),%al
+ 156:	00 00                	add    %al,(%rax)
+ 158:	00 04 0a             	add    %al,(%rdx,%rcx,1)
+ 15b:	01 6e 02             	add    %ebp,0x2(%rsi)
+ 15e:	00 00                	add    %al,(%rax)
+ 160:	68 0a 00 00 00       	pushq  $0xa
+ 165:	00 04 0c             	add    %al,(%rsp,%rcx,1)
+ 168:	01 62 00             	add    %esp,0x0(%rdx)
+ 16b:	00 00                	add    %al,(%rax)
+ 16d:	70 0a                	jo     179 <.debug_info+0x179>
+ 16f:	00 00                	add    %al,(%rax)
+ 171:	00 00                	add    %al,(%rax)
+ 173:	04 10                	add    $0x10,%al
+ 175:	01 62 00             	add    %esp,0x0(%rdx)
+ 178:	00 00                	add    %al,(%rax)
+ 17a:	74 0a                	je     186 <.debug_info+0x186>
+ 17c:	00 00                	add    %al,(%rax)
+ 17e:	00 00                	add    %al,(%rax)
+ 180:	04 12                	add    $0x12,%al
+ 182:	01 70 00             	add    %esi,0x0(%rax)
+ 185:	00 00                	add    %al,(%rax)
+ 187:	78 0a                	js     193 <.debug_info+0x193>
+ 189:	00 00                	add    %al,(%rax)
+ 18b:	00 00                	add    %al,(%rax)
+ 18d:	04 16                	add    $0x16,%al
+ 18f:	01 46 00             	add    %eax,0x0(%rsi)
+ 192:	00 00                	add    %al,(%rax)
+ 194:	80 0a 00             	orb    $0x0,(%rdx)
+ 197:	00 00                	add    %al,(%rax)
+ 199:	00 04 17             	add    %al,(%rdi,%rdx,1)
+ 19c:	01 54 00 00          	add    %edx,0x0(%rax,%rax,1)
+ 1a0:	00 82 0a 00 00 00    	add    %al,0xa(%rdx)
+ 1a6:	00 04 18             	add    %al,(%rax,%rbx,1)
+ 1a9:	01 74 02 00          	add    %esi,0x0(%rdx,%rax,1)
+ 1ad:	00 83 0a 00 00 00    	add    %al,0xa(%rbx)
+ 1b3:	00 04 1c             	add    %al,(%rsp,%rbx,1)
+ 1b6:	01 84 02 00 00 88 0a 	add    %eax,0xa880000(%rdx,%rax,1)
+ 1bd:	00 00                	add    %al,(%rax)
+ 1bf:	00 00                	add    %al,(%rax)
+ 1c1:	04 25                	add    $0x25,%al
+ 1c3:	01 7b 00             	add    %edi,0x0(%rbx)
+ 1c6:	00 00                	add    %al,(%rax)
+ 1c8:	90                   	nop
+ 1c9:	0a 00                	or     (%rax),%al
+ 1cb:	00 00                	add    %al,(%rax)
+ 1cd:	00 04 2d 01 91 00 00 	add    %al,0x9101(,%rbp,1)
+ 1d4:	00 98 0a 00 00 00    	add    %bl,0xa(%rax)
+ 1da:	00 04 2e             	add    %al,(%rsi,%rbp,1)
+ 1dd:	01 91 00 00 00 a0    	add    %edx,-0x60000000(%rcx)
+ 1e3:	0a 00                	or     (%rax),%al
+ 1e5:	00 00                	add    %al,(%rax)
+ 1e7:	00 04 2f             	add    %al,(%rdi,%rbp,1)
+ 1ea:	01 91 00 00 00 a8    	add    %edx,-0x58000000(%rcx)
+ 1f0:	0a 00                	or     (%rax),%al
+ 1f2:	00 00                	add    %al,(%rax)
+ 1f4:	00 04 30             	add    %al,(%rax,%rsi,1)
+ 1f7:	01 91 00 00 00 b0    	add    %edx,-0x50000000(%rcx)
+ 1fd:	0a 00                	or     (%rax),%al
+ 1ff:	00 00                	add    %al,(%rax)
+ 201:	00 04 32             	add    %al,(%rdx,%rsi,1)
+ 204:	01 2d 00 00 00 b8    	add    %ebp,-0x48000000(%rip)        # ffffffffb800020a <main+0xffffffffb7fffdfd>
+ 20a:	0a 00                	or     (%rax),%al
+ 20c:	00 00                	add    %al,(%rax)
+ 20e:	00 04 33             	add    %al,(%rbx,%rsi,1)
+ 211:	01 62 00             	add    %esp,0x0(%rdx)
+ 214:	00 00                	add    %al,(%rax)
+ 216:	c0 0a 00             	rorb   $0x0,(%rdx)
+ 219:	00 00                	add    %al,(%rax)
+ 21b:	00 04 35 01 8a 02 00 	add    %al,0x28a01(,%rsi,1)
+ 222:	00 c4                	add    %al,%ah
+ 224:	00 02                	add    %al,(%rdx)
+ 226:	00 00                	add    %al,(%rax)
+ 228:	00 00                	add    %al,(%rax)
+ 22a:	05 07 a5 00 00       	add    $0xa507,%eax
+ 22f:	00 0b                	add    %cl,(%rbx)
+ 231:	00 00                	add    %al,(%rax)
+ 233:	00 00                	add    %al,(%rax)
+ 235:	04 9a                	add    $0x9a,%al
+ 237:	08 00                	or     %al,(%rax)
+ 239:	00 00                	add    %al,(%rax)
+ 23b:	00 18                	add    %bl,(%rax)
+ 23d:	04 a0                	add    $0xa0,%al
+ 23f:	68 02 00 00 09       	pushq  $0x9000002
+ 244:	00 00                	add    %al,(%rax)
+ 246:	00 00                	add    %al,(%rax)
+ 248:	04 a1                	add    $0xa1,%al
+ 24a:	68 02 00 00 00       	pushq  $0x2
+ 24f:	09 00                	or     %eax,(%rax)
+ 251:	00 00                	add    %al,(%rax)
+ 253:	00 04 a2             	add    %al,(%rdx,%riz,4)
+ 256:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 257:	02 00                	add    (%rax),%al
+ 259:	00 08                	add    %cl,(%rax)
+ 25b:	09 00                	or     %eax,(%rax)
+ 25d:	00 00                	add    %al,(%rax)
+ 25f:	00 04 a6             	add    %al,(%rsi,%riz,4)
+ 262:	62                   	(bad)  
+ 263:	00 00                	add    %al,(%rax)
+ 265:	00 10                	add    %dl,(%rax)
+ 267:	00 06                	add    %al,(%rsi)
+ 269:	08 37                	or     %dh,(%rdi)
+ 26b:	02 00                	add    (%rax),%al
+ 26d:	00 06                	add    %al,(%rsi)
+ 26f:	08 a5 00 00 00 0c    	or     %ah,0xc000000(%rbp)
+ 275:	99                   	cltd   
+ 276:	00 00                	add    %al,(%rax)
+ 278:	00 84 02 00 00 0d 38 	add    %al,0x380d0000(%rdx,%rax,1)
+ 27f:	00 00                	add    %al,(%rax)
+ 281:	00 00                	add    %al,(%rax)
+ 283:	00 06                	add    %al,(%rsi)
+ 285:	08 30                	or     %dh,(%rax)
+ 287:	02 00                	add    (%rax),%al
+ 289:	00 0c 99             	add    %cl,(%rcx,%rbx,4)
+ 28c:	00 00                	add    %al,(%rax)
+ 28e:	00 9a 02 00 00 0d    	add    %bl,0xd000002(%rdx)
+ 294:	38 00                	cmp    %al,(%rax)
+ 296:	00 00                	add    %al,(%rax)
+ 298:	13 00                	adc    (%rax),%eax
+ 29a:	0e                   	(bad)  
+ 29b:	00 00                	add    %al,(%rax)
+ 29d:	00 00                	add    %al,(%rax)
+ 29f:	0f 00 00             	sldt   (%rax)
+ 2a2:	00 00                	add    %al,(%rax)
+ 2a4:	04 3f                	add    $0x3f,%al
+ 2a6:	01 9a 02 00 00 0f    	add    %ebx,0xf000002(%rdx)
+ 2ac:	00 00                	add    %al,(%rax)
+ 2ae:	00 00                	add    %al,(%rax)
+ 2b0:	04 40                	add    $0x40,%al
+ 2b2:	01 9a 02 00 00 0f    	add    %ebx,0xf000002(%rdx)
+ 2b8:	00 00                	add    %al,(%rax)
+ 2ba:	00 00                	add    %al,(%rax)
+ 2bc:	04 41                	add    $0x41,%al
+ 2be:	01 9a 02 00 00 06    	add    %ebx,0x6000002(%rdx)
+ 2c4:	08 a0 00 00 00 07    	or     %ah,0x7000000(%rax)
+ 2ca:	c3                   	retq   
+ 2cb:	02 00                	add    (%rax),%al
+ 2cd:	00 10                	add    %dl,(%rax)
+ 2cf:	00 00                	add    %al,(%rax)
+ 2d1:	00 00                	add    %al,(%rax)
+ 2d3:	06                   	(bad)  
+ 2d4:	87 6e 02             	xchg   %ebp,0x2(%rsi)
+ 2d7:	00 00                	add    %al,(%rax)
+ 2d9:	10 00                	adc    %al,(%rax)
+ 2db:	00 00                	add    %al,(%rax)
+ 2dd:	00 06                	add    %al,(%rsi)
+ 2df:	88 6e 02             	mov    %ch,0x2(%rsi)
+ 2e2:	00 00                	add    %al,(%rax)
+ 2e4:	10 00                	adc    %al,(%rax)
+ 2e6:	00 00                	add    %al,(%rax)
+ 2e8:	00 06                	add    %al,(%rsi)
+ 2ea:	89 6e 02             	mov    %ebp,0x2(%rsi)
+ 2ed:	00 00                	add    %al,(%rax)
+ 2ef:	10 00                	adc    %al,(%rax)
+ 2f1:	00 00                	add    %al,(%rax)
+ 2f3:	00 07                	add    %al,(%rdi)
+ 2f5:	1a 62 00             	sbb    0x0(%rdx),%ah
+ 2f8:	00 00                	add    %al,(%rax)
+ 2fa:	0c c9                	or     $0xc9,%al
+ 2fc:	02 00                	add    (%rax),%al
+ 2fe:	00 05 03 00 00 11    	add    %al,0x11000003(%rip)        # 11000307 <main+0x10fffefa>
+ 304:	00 07                	add    %al,(%rdi)
+ 306:	fa                   	cli    
+ 307:	02 00                	add    (%rax),%al
+ 309:	00 10                	add    %dl,(%rax)
+ 30b:	00 00                	add    %al,(%rax)
+ 30d:	00 00                	add    %al,(%rax)
+ 30f:	07                   	(bad)  
+ 310:	1b 05 03 00 00 03    	sbb    0x3000003(%rip),%eax        # 3000319 <main+0x2ffff0c>
+ 316:	08 05 00 00 00 00    	or     %al,0x0(%rip)        # 31c <.debug_info+0x31c>
+ 31c:	02 00                	add    (%rax),%al
+ 31e:	00 00                	add    %al,(%rax)
+ 320:	00 08                	add    %cl,(%rax)
+ 322:	62                   	(bad)  
+ 323:	86 00                	xchg   %al,(%rax)
+ 325:	00 00                	add    %al,(%rax)
+ 327:	03 08                	add    (%rax),%ecx
+ 329:	07                   	(bad)  
+ 32a:	00 00                	add    %al,(%rax)
+ 32c:	00 00                	add    %al,(%rax)
+ 32e:	0f 00 00             	sldt   (%rax)
+ 331:	00 00                	add    %al,(%rax)
+ 333:	09 22                	or     %esp,(%rdx)
+ 335:	02 3a                	add    (%rdx),%bh
+ 337:	03 00                	add    (%rax),%eax
+ 339:	00 06                	add    %al,(%rsi)
+ 33b:	08 93 00 00 00 10    	or     %dl,0x10000000(%rbx)
+ 341:	00 00                	add    %al,(%rax)
+ 343:	00 00                	add    %al,(%rax)
+ 345:	0a 24 93             	or     (%rbx,%rdx,4),%ah
+ 348:	00 00                	add    %al,(%rax)
+ 34a:	00 10                	add    %dl,(%rax)
+ 34c:	00 00                	add    %al,(%rax)
+ 34e:	00 00                	add    %al,(%rax)
+ 350:	0a 32                	or     (%rdx),%dh
+ 352:	62                   	(bad)  
+ 353:	00 00                	add    %al,(%rax)
+ 355:	00 10                	add    %dl,(%rax)
+ 357:	00 00                	add    %al,(%rax)
+ 359:	00 00                	add    %al,(%rax)
+ 35b:	0a 37                	or     (%rdi),%dh
+ 35d:	62                   	(bad)  
+ 35e:	00 00                	add    %al,(%rax)
+ 360:	00 10                	add    %dl,(%rax)
+ 362:	00 00                	add    %al,(%rax)
+ 364:	00 00                	add    %al,(%rax)
+ 366:	0a 3b                	or     (%rbx),%bh
+ 368:	62                   	(bad)  
+ 369:	00 00                	add    %al,(%rax)
+ 36b:	00 0c c9             	add    %cl,(%rcx,%rcx,8)
+ 36e:	02 00                	add    (%rax),%al
+ 370:	00 7c 03 00          	add    %bh,0x0(%rbx,%rax,1)
+ 374:	00 0d 38 00 00 00    	add    %cl,0x38(%rip)        # 3b2 <.debug_info+0x3b2>
+ 37a:	40 00 07             	add    %al,(%rdi)
+ 37d:	6c                   	insb   (%dx),%es:(%rdi)
+ 37e:	03 00                	add    (%rax),%eax
+ 380:	00 0f                	add    %cl,(%rdi)
+ 382:	00 00                	add    %al,(%rax)
+ 384:	00 00                	add    %al,(%rax)
+ 386:	0b 1e                	or     (%rsi),%ebx
+ 388:	01 7c 03 00          	add    %edi,0x0(%rbx,%rax,1)
+ 38c:	00 0f                	add    %cl,(%rdi)
+ 38e:	00 00                	add    %al,(%rax)
+ 390:	00 00                	add    %al,(%rax)
+ 392:	0b 1f                	or     (%rdi),%ebx
+ 394:	01 7c 03 00          	add    %edi,0x0(%rbx,%rax,1)
+ 398:	00 12                	add    %dl,(%rdx)
+ 39a:	62                   	(bad)  
+ 39b:	67 00 01             	add    %al,(%ecx)
+ 39e:	0d 62 00 00 00       	or     $0x62,%eax
+ 3a3:	09 03                	or     %eax,(%rbx)
+	...
+ 3ad:	12 63 64             	adc    0x64(%rbx),%ah
+ 3b0:	00 01                	add    %al,(%rcx)
+ 3b2:	0e                   	(bad)  
+ 3b3:	c1 03 00             	roll   $0x0,(%rbx)
+ 3b6:	00 09                	add    %cl,(%rcx)
+ 3b8:	03 00                	add    (%rax),%eax
+ 3ba:	00 00                	add    %al,(%rax)
+ 3bc:	00 00                	add    %al,(%rax)
+ 3be:	00 00                	add    %al,(%rax)
+ 3c0:	00 03                	add    %al,(%rbx)
+ 3c2:	01 02                	add    %eax,(%rdx)
+ 3c4:	00 00                	add    %al,(%rax)
+ 3c6:	00 00                	add    %al,(%rax)
+ 3c8:	13 00                	adc    (%rax),%eax
+ 3ca:	00 00                	add    %al,(%rax)
+ 3cc:	00 01                	add    %al,(%rcx)
+ 3ce:	62 c1                	(bad)  
+ 3d0:	03 00                	add    (%rax),%eax
+ 3d2:	00 09                	add    %cl,(%rcx)
+ 3d4:	03 00                	add    (%rax),%eax
+ 3d6:	00 00                	add    %al,(%rax)
+ 3d8:	00 00                	add    %al,(%rax)
+ 3da:	00 00                	add    %al,(%rax)
+ 3dc:	00 14 00             	add    %dl,(%rax,%rax,1)
+ 3df:	00 00                	add    %al,(%rax)
+ 3e1:	00 01                	add    %al,(%rcx)
+ 3e3:	7e 62                	jle    447 <.debug_info+0x447>
+	...
+ 3ed:	00 00                	add    %al,(%rax)
+ 3ef:	00 e7                	add    %ah,%bh
+ 3f1:	01 00                	add    %eax,(%rax)
+ 3f3:	00 00                	add    %al,(%rax)
+ 3f5:	00 00                	add    %al,(%rax)
+ 3f7:	00 01                	add    %al,(%rcx)
+ 3f9:	9c                   	pushfq 
+ 3fa:	d7                   	xlat   %ds:(%rbx)
+ 3fb:	04 00                	add    $0x0,%al
+ 3fd:	00 15 00 00 00 00    	add    %dl,0x0(%rip)        # 403 <.debug_info+0x403>
+ 403:	01 7e 62             	add    %edi,0x62(%rsi)
+ 406:	00 00                	add    %al,(%rax)
+ 408:	00 03                	add    %al,(%rbx)
+ 40a:	91                   	xchg   %eax,%ecx
+ 40b:	bc 7d 15 00 00       	mov    $0x157d,%esp
+ 410:	00 00                	add    %al,(%rax)
+ 412:	01 7e 3a             	add    %edi,0x3a(%rsi)
+ 415:	03 00                	add    (%rax),%eax
+ 417:	00 03                	add    %al,(%rbx)
+ 419:	91                   	xchg   %eax,%ecx
+ 41a:	b0 7d                	mov    $0x7d,%al
+ 41c:	16                   	(bad)  
+ 41d:	00 00                	add    %al,(%rax)
+ 41f:	00 00                	add    %al,(%rax)
+ 421:	01 80 d7 04 00 00    	add    %eax,0x4d7(%rax)
+ 427:	03 91 e0 7d 16 00    	add    0x167de0(%rcx),%edx
+ 42d:	00 00                	add    %al,(%rax)
+ 42f:	00 01                	add    %al,(%rcx)
+ 431:	81 d7 04 00 00 03    	adc    $0x3000004,%edi
+ 437:	91                   	xchg   %eax,%ecx
+ 438:	b0 7e                	mov    $0x7e,%al
+ 43a:	16                   	(bad)  
+ 43b:	00 00                	add    %al,(%rax)
+ 43d:	00 00                	add    %al,(%rax)
+ 43f:	01 82 e7 04 00 00    	add    %eax,0x4e7(%rdx)
+ 445:	03 91 80 7f 17 00    	add    0x177f80(%rcx),%edx
+ 44b:	00 00                	add    %al,(%rax)
+ 44d:	00 01                	add    %al,(%rcx)
+ 44f:	83 62 00 00          	andl   $0x0,0x0(%rdx)
+ 453:	00 16                	add    %dl,(%rsi)
+ 455:	00 00                	add    %al,(%rax)
+ 457:	00 00                	add    %al,(%rax)
+ 459:	01 84 62 00 00 00 03 	add    %eax,0x3000000(%rdx,%riz,2)
+ 460:	91                   	xchg   %eax,%ecx
+ 461:	c4                   	(bad)  
+ 462:	7d 16                	jge    47a <.debug_info+0x47a>
+ 464:	00 00                	add    %al,(%rax)
+ 466:	00 00                	add    %al,(%rax)
+ 468:	01 85 c3 02 00 00    	add    %eax,0x2c3(%rbp)
+ 46e:	03 91 d8 7d 18 00    	add    0x187dd8(%rcx),%edx
+ 474:	00 00                	add    %al,(%rax)
+ 476:	00 00                	add    %al,(%rax)
+ 478:	00 00                	add    %al,(%rax)
+ 47a:	00 91 00 00 00 00    	add    %dl,0x0(%rcx)
+ 480:	00 00                	add    %al,(%rax)
+ 482:	00 a6 04 00 00 16    	add    %ah,0x16000004(%rsi)
+ 488:	00 00                	add    %al,(%rax)
+ 48a:	00 00                	add    %al,(%rax)
+ 48c:	01 a9 62 00 00 00    	add    %ebp,0x62(%rcx)
+ 492:	03 91 d4 7d 19 70    	add    0x70197dd4(%rcx),%edx
+ 498:	69 64 00 01 aa 1c 03 	imul   $0x31caa,0x1(%rax,%rax,1),%esp
+ 49f:	00 
+ 4a0:	00 03                	add    %al,(%rbx)
+ 4a2:	91                   	xchg   %eax,%ecx
+ 4a3:	d0 7d 00             	sarb   0x0(%rbp)
+ 4a6:	1a 00                	sbb    (%rax),%al
+ 4a8:	00 00                	add    %al,(%rax)
+ 4aa:	00 00                	add    %al,(%rax)
+ 4ac:	00 00                	add    %al,(%rax)
+ 4ae:	00 a1 00 00 00 00    	add    %ah,0x0(%rcx)
+ 4b4:	00 00                	add    %al,(%rax)
+ 4b6:	00 19                	add    %bl,(%rcx)
+ 4b8:	70 69                	jo     523 <.debug_info+0x523>
+ 4ba:	64 00 01             	add    %al,%fs:(%rcx)
+ 4bd:	c5 1c 03             	(bad)  
+ 4c0:	00 00                	add    %al,(%rax)
+ 4c2:	03 91 c8 7d 16 00    	add    0x167dc8(%rcx),%edx
+ 4c8:	00 00                	add    %al,(%rax)
+ 4ca:	00 01                	add    %al,(%rcx)
+ 4cc:	c7                   	(bad)  
+ 4cd:	62                   	(bad)  
+ 4ce:	00 00                	add    %al,(%rax)
+ 4d0:	00 03                	add    %al,(%rbx)
+ 4d2:	91                   	xchg   %eax,%ecx
+ 4d3:	cc                   	int3   
+ 4d4:	7d 00                	jge    4d6 <.debug_info+0x4d6>
+ 4d6:	00 0c 93             	add    %cl,(%rbx,%rdx,4)
+ 4d9:	00 00                	add    %al,(%rax)
+ 4db:	00 e7                	add    %ah,%bh
+ 4dd:	04 00                	add    $0x0,%al
+ 4df:	00 0d 38 00 00 00    	add    %cl,0x38(%rip)        # 51d <.debug_info+0x51d>
+ 4e5:	09 00                	or     %eax,(%rax)
+ 4e7:	0c 99                	or     $0x99,%al
+ 4e9:	00 00                	add    %al,(%rax)
+ 4eb:	00 f7                	add    %dh,%bh
+ 4ed:	04 00                	add    $0x0,%al
+ 4ef:	00 0d 38 00 00 00    	add    %cl,0x38(%rip)        # 52d <.debug_info+0x52d>
+ 4f5:	63 00                	movslq (%rax),%eax
+ 4f7:	1b 4c 6f 67          	sbb    0x67(%rdi,%rbp,2),%ecx
+ 4fb:	00 01                	add    %al,(%rcx)
+ 4fd:	64 00 00             	add    %al,%fs:(%rax)
+ 500:	00 00                	add    %al,(%rax)
+ 502:	00 00                	add    %al,(%rax)
+ 504:	00 00                	add    %al,(%rax)
+ 506:	a6                   	cmpsb  %es:(%rdi),%ds:(%rsi)
+ 507:	00 00                	add    %al,(%rax)
+ 509:	00 00                	add    %al,(%rax)
+ 50b:	00 00                	add    %al,(%rax)
+ 50d:	00 01                	add    %al,(%rcx)
+ 50f:	9c                   	pushfq 
+ 510:	3f                   	(bad)  
+ 511:	05 00 00 15 00       	add    $0x150000,%eax
+ 516:	00 00                	add    %al,(%rax)
+ 518:	00 01                	add    %al,(%rcx)
+ 51a:	64 93                	fs xchg %eax,%ebx
+ 51c:	00 00                	add    %al,(%rax)
+ 51e:	00 02                	add    %al,(%rdx)
+ 520:	91                   	xchg   %eax,%ecx
+ 521:	58                   	pop    %rax
+ 522:	1c 70                	sbb    $0x70,%al
+ 524:	69 64 00 01 64 62 00 	imul   $0x6264,0x1(%rax,%rax,1),%esp
+ 52b:	00 
+ 52c:	00 02                	add    %al,(%rdx)
+ 52e:	91                   	xchg   %eax,%ecx
+ 52f:	54                   	push   %rsp
+ 530:	16                   	(bad)  
+ 531:	00 00                	add    %al,(%rax)
+ 533:	00 00                	add    %al,(%rax)
+ 535:	01 66 3f             	add    %esp,0x3f(%rsi)
+ 538:	05 00 00 02 91       	add    $0x91020000,%eax
+ 53d:	68 00 06 08 25       	pushq  $0x25080600
+ 542:	02 00                	add    (%rax),%al
+ 544:	00 14 00             	add    %dl,(%rax,%rax,1)
+ 547:	00 00                	add    %al,(%rax)
+ 549:	00 01                	add    %al,(%rcx)
+ 54b:	3c 62                	cmp    $0x62,%al
+	...
+ 555:	00 00                	add    %al,(%rax)
+ 557:	00 d6                	add    %dl,%dh
+ 559:	01 00                	add    %eax,(%rax)
+ 55b:	00 00                	add    %al,(%rax)
+ 55d:	00 00                	add    %al,(%rax)
+ 55f:	00 01                	add    %al,(%rcx)
+ 561:	9c                   	pushfq 
+ 562:	aa                   	stos   %al,%es:(%rdi)
+ 563:	05 00 00 15 00       	add    $0x150000,%eax
+ 568:	00 00                	add    %al,(%rax)
+ 56a:	00 01                	add    %al,(%rcx)
+ 56c:	3c 93                	cmp    $0x93,%al
+ 56e:	00 00                	add    %al,(%rax)
+ 570:	00 02                	add    %al,(%rdx)
+ 572:	91                   	xchg   %eax,%ecx
+ 573:	48 15 00 00 00 00    	adc    $0x0,%rax
+ 579:	01 3c 3a             	add    %edi,(%rdx,%rdi,1)
+ 57c:	03 00                	add    (%rax),%eax
+ 57e:	00 02                	add    %al,(%rdx)
+ 580:	91                   	xchg   %eax,%ecx
+ 581:	40 15 00 00 00 00    	rex adc $0x0,%eax
+ 587:	01 3c 3a             	add    %edi,(%rdx,%rdi,1)
+ 58a:	03 00                	add    (%rax),%eax
+ 58c:	00 03                	add    %al,(%rbx)
+ 58e:	91                   	xchg   %eax,%ecx
+ 58f:	b8 7f 19 69 00       	mov    $0x69197f,%eax
+ 594:	01 3e                	add    %edi,(%rsi)
+ 596:	62                   	(bad)  
+ 597:	00 00                	add    %al,(%rax)
+ 599:	00 02                	add    %al,(%rdx)
+ 59b:	91                   	xchg   %eax,%ecx
+ 59c:	58                   	pop    %rax
+ 59d:	19 75 00             	sbb    %esi,0x0(%rbp)
+ 5a0:	01 3f                	add    %edi,(%rdi)
+ 5a2:	62                   	(bad)  
+ 5a3:	00 00                	add    %al,(%rax)
+ 5a5:	00 02                	add    %al,(%rdx)
+ 5a7:	91                   	xchg   %eax,%ecx
+ 5a8:	5c                   	pop    %rsp
+ 5a9:	00 1d 00 00 00 00    	add    %bl,0x0(%rip)        # 5af <.debug_info+0x5af>
+ 5af:	01 31                	add    %esi,(%rcx)
+	...
+ 5b9:	76 00                	jbe    5bb <.debug_info+0x5bb>
+ 5bb:	00 00                	add    %al,(%rax)
+ 5bd:	00 00                	add    %al,(%rax)
+ 5bf:	00 00                	add    %al,(%rax)
+ 5c1:	01 9c 10 06 00 00 1c 	add    %ebx,0x1c000006(%rax,%rdx,1)
+ 5c8:	73 69                	jae    633 <.debug_info+0x633>
+ 5ca:	67 00 01             	add    %al,(%ecx)
+ 5cd:	31 62 00             	xor    %esp,0x0(%rdx)
+ 5d0:	00 00                	add    %al,(%rax)
+ 5d2:	03 91 ec 7e 19 70    	add    0x70197eec(%rcx),%edx
+ 5d8:	69 64 00 01 33 1c 03 	imul   $0x31c33,0x1(%rax,%rax,1),%esp
+ 5df:	00 
+ 5e0:	00 03                	add    %al,(%rbx)
+ 5e2:	91                   	xchg   %eax,%ecx
+ 5e3:	f8                   	clc    
+ 5e4:	7e 19                	jle    5ff <.debug_info+0x5ff>
+ 5e6:	62                   	(bad)  
+ 5e7:	75 66                	jne    64f <.debug_info+0x64f>
+ 5e9:	00 01                	add    %al,(%rcx)
+ 5eb:	35 e7 04 00 00       	xor    $0x4e7,%eax
+ 5f0:	03 91 80 7f 19 70    	add    0x70197f80(%rcx),%edx
+ 5f6:	64 00 01             	add    %al,%fs:(%rcx)
+ 5f9:	37                   	(bad)  
+ 5fa:	62                   	(bad)  
+ 5fb:	00 00                	add    %al,(%rax)
+ 5fd:	00 03                	add    %al,(%rbx)
+ 5ff:	91                   	xchg   %eax,%ecx
+ 600:	fc                   	cld    
+ 601:	7e 1e                	jle    621 <.debug_info+0x621>
+ 603:	4c 6f                	rex.WR outsl %ds:(%rsi),(%dx)
+ 605:	67 00 01             	add    %al,(%ecx)
+ 608:	39 62 00             	cmp    %esp,0x0(%rdx)
+ 60b:	00 00                	add    %al,(%rax)
+ 60d:	1f                   	(bad)  
+ 60e:	00 00                	add    %al,(%rax)
+ 610:	20 00                	and    %al,(%rax)
+ 612:	00 00                	add    %al,(%rax)
+ 614:	00 01                	add    %al,(%rcx)
+ 616:	27                   	(bad)  
+	...
+ 61f:	3c 00                	cmp    $0x0,%al
+ 621:	00 00                	add    %al,(%rax)
+ 623:	00 00                	add    %al,(%rax)
+ 625:	00 00                	add    %al,(%rax)
+ 627:	01 9c 48 06 00 00 15 	add    %ebx,0x15000006(%rax,%rcx,2)
+ 62e:	00 00                	add    %al,(%rax)
+ 630:	00 00                	add    %al,(%rax)
+ 632:	01 27                	add    %esp,(%rdi)
+ 634:	93                   	xchg   %eax,%ebx
+ 635:	00 00                	add    %al,(%rax)
+ 637:	00 02                	add    %al,(%rdx)
+ 639:	91                   	xchg   %eax,%ecx
+ 63a:	58                   	pop    %rax
+ 63b:	19 69 00             	sbb    %ebp,0x0(%rcx)
+ 63e:	01 29                	add    %ebp,(%rcx)
+ 640:	62                   	(bad)  
+ 641:	00 00                	add    %al,(%rax)
+ 643:	00 02                	add    %al,(%rdx)
+ 645:	91                   	xchg   %eax,%ecx
+ 646:	6c                   	insb   (%dx),%es:(%rdi)
+ 647:	00 1d 00 00 00 00    	add    %bl,0x0(%rip)        # 64d <.debug_info+0x64d>
+ 64d:	01 17                	add    %edx,(%rdi)
+	...
+ 657:	97                   	xchg   %eax,%edi
+ 658:	00 00                	add    %al,(%rax)
+ 65a:	00 00                	add    %al,(%rax)
+ 65c:	00 00                	add    %al,(%rax)
+ 65e:	00 01                	add    %al,(%rcx)
+ 660:	9c                   	pushfq 
+ 661:	8f 06                	popq   (%rsi)
+ 663:	00 00                	add    %al,(%rax)
+ 665:	15 00 00 00 00       	adc    $0x0,%eax
+ 66a:	01 17                	add    %edx,(%rdi)
+ 66c:	93                   	xchg   %eax,%ebx
+ 66d:	00 00                	add    %al,(%rax)
+ 66f:	00 02                	add    %al,(%rdx)
+ 671:	91                   	xchg   %eax,%ecx
+ 672:	58                   	pop    %rax
+ 673:	19 72 65             	sbb    %esi,0x65(%rdx)
+ 676:	74 00                	je     678 <.debug_info+0x678>
+ 678:	01 19                	add    %ebx,(%rcx)
+ 67a:	93                   	xchg   %eax,%ebx
+ 67b:	00 00                	add    %al,(%rax)
+ 67d:	00 02                	add    %al,(%rdx)
+ 67f:	91                   	xchg   %eax,%ecx
+ 680:	68 21 00 00 00       	pushq  $0x21
+ 685:	00 01                	add    %al,(%rcx)
+ 687:	1a 62 00             	sbb    0x0(%rdx),%ah
+ 68a:	00 00                	add    %al,(%rax)
+ 68c:	1f                   	(bad)  
+ 68d:	00 00                	add    %al,(%rax)
+ 68f:	22 00                	and    (%rax),%al
+ 691:	00 00                	add    %al,(%rax)
+ 693:	00 01                	add    %al,(%rcx)
+ 695:	10 62 00             	adc    %ah,0x0(%rdx)
+	...
+ 6a0:	00 00                	add    %al,(%rax)
+ 6a2:	48 00 00             	rex.W add %al,(%rax)
+ 6a5:	00 00                	add    %al,(%rax)
+ 6a7:	00 00                	add    %al,(%rax)
+ 6a9:	00 01                	add    %al,(%rcx)
+ 6ab:	9c                   	pushfq 
+ 6ac:	15 00 00 00 00       	adc    $0x0,%eax
+ 6b1:	01 10                	add    %edx,(%rax)
+ 6b3:	93                   	xchg   %eax,%ebx
+ 6b4:	00 00                	add    %al,(%rax)
+ 6b6:	00 02                	add    %al,(%rdx)
+ 6b8:	91                   	xchg   %eax,%ecx
+ 6b9:	68 15 00 00 00       	pushq  $0x15
+ 6be:	00 01                	add    %al,(%rcx)
+ 6c0:	10 3a                	adc    %bh,(%rdx)
+ 6c2:	03 00                	add    (%rax),%eax
+ 6c4:	00 02                	add    %al,(%rdx)
+ 6c6:	91                   	xchg   %eax,%ecx
+ 6c7:	60                   	(bad)  
+ 6c8:	15 00 00 00 00       	adc    $0x0,%eax
+ 6cd:	01 10                	add    %edx,(%rax)
+ 6cf:	3a 03                	cmp    (%rbx),%al
+ 6d1:	00 00                	add    %al,(%rax)
+ 6d3:	02 91 58 23 00 00    	add    0x2358(%rcx),%dl
+ 6d9:	00 00                	add    %al,(%rax)
+ 6db:	01 12                	add    %edx,(%rdx)
+ 6dd:	62                   	(bad)  
+ 6de:	00 00                	add    %al,(%rax)
+ 6e0:	00 e7                	add    %ah,%bh
+ 6e2:	06                   	(bad)  
+ 6e3:	00 00                	add    %al,(%rax)
+ 6e5:	1f                   	(bad)  
+ 6e6:	00 21                	add    %ah,(%rcx)
+ 6e8:	00 00                	add    %al,(%rax)
+ 6ea:	00 00                	add    %al,(%rax)
+ 6ec:	01 13                	add    %edx,(%rbx)
+ 6ee:	62                   	(bad)  
+ 6ef:	00 00                	add    %al,(%rax)
+ 6f1:	00 1f                	add    %bl,(%rdi)
+ 6f3:	00 00                	add    %al,(%rax)
+	...
+
+Disassembly of section .debug_abbrev:
+
+0000000000000000 <.debug_abbrev>:
+   0:	01 11                	add    %edx,(%rcx)
+   2:	01 25 0e 13 0b 03    	add    %esp,0x30b130e(%rip)        # 30b1316 <main+0x30b0f09>
+   8:	0e                   	(bad)  
+   9:	1b 0e                	sbb    (%rsi),%ecx
+   b:	11 01                	adc    %eax,(%rcx)
+   d:	12 07                	adc    (%rdi),%al
+   f:	10 17                	adc    %dl,(%rdi)
+  11:	00 00                	add    %al,(%rax)
+  13:	02 16                	add    (%rsi),%dl
+  15:	00 03                	add    %al,(%rbx)
+  17:	0e                   	(bad)  
+  18:	3a 0b                	cmp    (%rbx),%cl
+  1a:	3b 0b                	cmp    (%rbx),%ecx
+  1c:	49 13 00             	adc    (%r8),%rax
+  1f:	00 03                	add    %al,(%rbx)
+  21:	24 00                	and    $0x0,%al
+  23:	0b 0b                	or     (%rbx),%ecx
+  25:	3e 0b 03             	or     %ds:(%rbx),%eax
+  28:	0e                   	(bad)  
+  29:	00 00                	add    %al,(%rax)
+  2b:	04 24                	add    $0x24,%al
+  2d:	00 0b                	add    %cl,(%rbx)
+  2f:	0b 3e                	or     (%rsi),%edi
+  31:	0b 03                	or     (%rbx),%eax
+  33:	08 00                	or     %al,(%rax)
+  35:	00 05 0f 00 0b 0b    	add    %al,0xb0b000f(%rip)        # b0b004a <main+0xb0afc3d>
+  3b:	00 00                	add    %al,(%rax)
+  3d:	06                   	(bad)  
+  3e:	0f 00 0b             	str    (%rbx)
+  41:	0b 49 13             	or     0x13(%rcx),%ecx
+  44:	00 00                	add    %al,(%rax)
+  46:	07                   	(bad)  
+  47:	26 00 49 13          	add    %cl,%es:0x13(%rcx)
+  4b:	00 00                	add    %al,(%rax)
+  4d:	08 13                	or     %dl,(%rbx)
+  4f:	01 03                	add    %eax,(%rbx)
+  51:	0e                   	(bad)  
+  52:	0b 0b                	or     (%rbx),%ecx
+  54:	3a 0b                	cmp    (%rbx),%cl
+  56:	3b 0b                	cmp    (%rbx),%ecx
+  58:	01 13                	add    %edx,(%rbx)
+  5a:	00 00                	add    %al,(%rax)
+  5c:	09 0d 00 03 0e 3a    	or     %ecx,0x3a0e0300(%rip)        # 3a0e0362 <main+0x3a0dff55>
+  62:	0b 3b                	or     (%rbx),%edi
+  64:	0b 49 13             	or     0x13(%rcx),%ecx
+  67:	38 0b                	cmp    %cl,(%rbx)
+  69:	00 00                	add    %al,(%rax)
+  6b:	0a 0d 00 03 0e 3a    	or     0x3a0e0300(%rip),%cl        # 3a0e0371 <main+0x3a0dff64>
+  71:	0b 3b                	or     (%rbx),%edi
+  73:	05 49 13 38 0b       	add    $0xb381349,%eax
+  78:	00 00                	add    %al,(%rax)
+  7a:	0b 16                	or     (%rsi),%edx
+  7c:	00 03                	add    %al,(%rbx)
+  7e:	0e                   	(bad)  
+  7f:	3a 0b                	cmp    (%rbx),%cl
+  81:	3b 0b                	cmp    (%rbx),%ecx
+  83:	00 00                	add    %al,(%rax)
+  85:	0c 01                	or     $0x1,%al
+  87:	01 49 13             	add    %ecx,0x13(%rcx)
+  8a:	01 13                	add    %edx,(%rbx)
+  8c:	00 00                	add    %al,(%rax)
+  8e:	0d 21 00 49 13       	or     $0x13490021,%eax
+  93:	2f                   	(bad)  
+  94:	0b 00                	or     (%rax),%eax
+  96:	00 0e                	add    %cl,(%rsi)
+  98:	13 00                	adc    (%rax),%eax
+  9a:	03 0e                	add    (%rsi),%ecx
+  9c:	3c 19                	cmp    $0x19,%al
+  9e:	00 00                	add    %al,(%rax)
+  a0:	0f 34                	sysenter 
+  a2:	00 03                	add    %al,(%rbx)
+  a4:	0e                   	(bad)  
+  a5:	3a 0b                	cmp    (%rbx),%cl
+  a7:	3b 05 49 13 3f 19    	cmp    0x193f1349(%rip),%eax        # 193f13f6 <main+0x193f0fe9>
+  ad:	3c 19                	cmp    $0x19,%al
+  af:	00 00                	add    %al,(%rax)
+  b1:	10 34 00             	adc    %dh,(%rax,%rax,1)
+  b4:	03 0e                	add    (%rsi),%ecx
+  b6:	3a 0b                	cmp    (%rbx),%cl
+  b8:	3b 0b                	cmp    (%rbx),%ecx
+  ba:	49 13 3f             	adc    (%r15),%rdi
+  bd:	19 3c 19             	sbb    %edi,(%rcx,%rbx,1)
+  c0:	00 00                	add    %al,(%rax)
+  c2:	11 21                	adc    %esp,(%rcx)
+  c4:	00 00                	add    %al,(%rax)
+  c6:	00 12                	add    %dl,(%rdx)
+  c8:	34 00                	xor    $0x0,%al
+  ca:	03 08                	add    (%rax),%ecx
+  cc:	3a 0b                	cmp    (%rbx),%cl
+  ce:	3b 0b                	cmp    (%rbx),%ecx
+  d0:	49 13 3f             	adc    (%r15),%rdi
+  d3:	19 02                	sbb    %eax,(%rdx)
+  d5:	18 00                	sbb    %al,(%rax)
+  d7:	00 13                	add    %dl,(%rbx)
+  d9:	34 00                	xor    $0x0,%al
+  db:	03 0e                	add    (%rsi),%ecx
+  dd:	3a 0b                	cmp    (%rbx),%cl
+  df:	3b 0b                	cmp    (%rbx),%ecx
+  e1:	49 13 3f             	adc    (%r15),%rdi
+  e4:	19 02                	sbb    %eax,(%rdx)
+  e6:	18 00                	sbb    %al,(%rax)
+  e8:	00 14 2e             	add    %dl,(%rsi,%rbp,1)
+  eb:	01 3f                	add    %edi,(%rdi)
+  ed:	19 03                	sbb    %eax,(%rbx)
+  ef:	0e                   	(bad)  
+  f0:	3a 0b                	cmp    (%rbx),%cl
+  f2:	3b 0b                	cmp    (%rbx),%ecx
+  f4:	27                   	(bad)  
+  f5:	19 49 13             	sbb    %ecx,0x13(%rcx)
+  f8:	11 01                	adc    %eax,(%rcx)
+  fa:	12 07                	adc    (%rdi),%al
+  fc:	40 18 96 42 19 01 13 	sbb    %dl,0x13011942(%rsi)
+ 103:	00 00                	add    %al,(%rax)
+ 105:	15 05 00 03 0e       	adc    $0xe030005,%eax
+ 10a:	3a 0b                	cmp    (%rbx),%cl
+ 10c:	3b 0b                	cmp    (%rbx),%ecx
+ 10e:	49 13 02             	adc    (%r10),%rax
+ 111:	18 00                	sbb    %al,(%rax)
+ 113:	00 16                	add    %dl,(%rsi)
+ 115:	34 00                	xor    $0x0,%al
+ 117:	03 0e                	add    (%rsi),%ecx
+ 119:	3a 0b                	cmp    (%rbx),%cl
+ 11b:	3b 0b                	cmp    (%rbx),%ecx
+ 11d:	49 13 02             	adc    (%r10),%rax
+ 120:	18 00                	sbb    %al,(%rax)
+ 122:	00 17                	add    %dl,(%rdi)
+ 124:	34 00                	xor    $0x0,%al
+ 126:	03 0e                	add    (%rsi),%ecx
+ 128:	3a 0b                	cmp    (%rbx),%cl
+ 12a:	3b 0b                	cmp    (%rbx),%ecx
+ 12c:	49 13 00             	adc    (%r8),%rax
+ 12f:	00 18                	add    %bl,(%rax)
+ 131:	0b 01                	or     (%rcx),%eax
+ 133:	11 01                	adc    %eax,(%rcx)
+ 135:	12 07                	adc    (%rdi),%al
+ 137:	01 13                	add    %edx,(%rbx)
+ 139:	00 00                	add    %al,(%rax)
+ 13b:	19 34 00             	sbb    %esi,(%rax,%rax,1)
+ 13e:	03 08                	add    (%rax),%ecx
+ 140:	3a 0b                	cmp    (%rbx),%cl
+ 142:	3b 0b                	cmp    (%rbx),%ecx
+ 144:	49 13 02             	adc    (%r10),%rax
+ 147:	18 00                	sbb    %al,(%rax)
+ 149:	00 1a                	add    %bl,(%rdx)
+ 14b:	0b 01                	or     (%rcx),%eax
+ 14d:	11 01                	adc    %eax,(%rcx)
+ 14f:	12 07                	adc    (%rdi),%al
+ 151:	00 00                	add    %al,(%rax)
+ 153:	1b 2e                	sbb    (%rsi),%ebp
+ 155:	01 3f                	add    %edi,(%rdi)
+ 157:	19 03                	sbb    %eax,(%rbx)
+ 159:	08 3a                	or     %bh,(%rdx)
+ 15b:	0b 3b                	or     (%rbx),%edi
+ 15d:	0b 27                	or     (%rdi),%esp
+ 15f:	19 11                	sbb    %edx,(%rcx)
+ 161:	01 12                	add    %edx,(%rdx)
+ 163:	07                   	(bad)  
+ 164:	40 18 96 42 19 01 13 	sbb    %dl,0x13011942(%rsi)
+ 16b:	00 00                	add    %al,(%rax)
+ 16d:	1c 05                	sbb    $0x5,%al
+ 16f:	00 03                	add    %al,(%rbx)
+ 171:	08 3a                	or     %bh,(%rdx)
+ 173:	0b 3b                	or     (%rbx),%edi
+ 175:	0b 49 13             	or     0x13(%rcx),%ecx
+ 178:	02 18                	add    (%rax),%bl
+ 17a:	00 00                	add    %al,(%rax)
+ 17c:	1d 2e 01 3f 19       	sbb    $0x193f012e,%eax
+ 181:	03 0e                	add    (%rsi),%ecx
+ 183:	3a 0b                	cmp    (%rbx),%cl
+ 185:	3b 0b                	cmp    (%rbx),%ecx
+ 187:	27                   	(bad)  
+ 188:	19 11                	sbb    %edx,(%rcx)
+ 18a:	01 12                	add    %edx,(%rdx)
+ 18c:	07                   	(bad)  
+ 18d:	40 18 96 42 19 01 13 	sbb    %dl,0x13011942(%rsi)
+ 194:	00 00                	add    %al,(%rax)
+ 196:	1e                   	(bad)  
+ 197:	2e 01 3f             	add    %edi,%cs:(%rdi)
+ 19a:	19 03                	sbb    %eax,(%rbx)
+ 19c:	08 3a                	or     %bh,(%rdx)
+ 19e:	0b 3b                	or     (%rbx),%edi
+ 1a0:	0b 49 13             	or     0x13(%rcx),%ecx
+ 1a3:	3c 19                	cmp    $0x19,%al
+ 1a5:	00 00                	add    %al,(%rax)
+ 1a7:	1f                   	(bad)  
+ 1a8:	18 00                	sbb    %al,(%rax)
+ 1aa:	00 00                	add    %al,(%rax)
+ 1ac:	20 2e                	and    %ch,(%rsi)
+ 1ae:	01 3f                	add    %edi,(%rdi)
+ 1b0:	19 03                	sbb    %eax,(%rbx)
+ 1b2:	0e                   	(bad)  
+ 1b3:	3a 0b                	cmp    (%rbx),%cl
+ 1b5:	3b 0b                	cmp    (%rbx),%ecx
+ 1b7:	27                   	(bad)  
+ 1b8:	19 11                	sbb    %edx,(%rcx)
+ 1ba:	01 12                	add    %edx,(%rdx)
+ 1bc:	07                   	(bad)  
+ 1bd:	40 18 97 42 19 01 13 	sbb    %dl,0x13011942(%rdi)
+ 1c4:	00 00                	add    %al,(%rax)
+ 1c6:	21 2e                	and    %ebp,(%rsi)
+ 1c8:	01 3f                	add    %edi,(%rdi)
+ 1ca:	19 03                	sbb    %eax,(%rbx)
+ 1cc:	0e                   	(bad)  
+ 1cd:	3a 0b                	cmp    (%rbx),%cl
+ 1cf:	3b 0b                	cmp    (%rbx),%ecx
+ 1d1:	49 13 3c 19          	adc    (%r9,%rbx,1),%rdi
+ 1d5:	00 00                	add    %al,(%rax)
+ 1d7:	22 2e                	and    (%rsi),%ch
+ 1d9:	01 3f                	add    %edi,(%rdi)
+ 1db:	19 03                	sbb    %eax,(%rbx)
+ 1dd:	0e                   	(bad)  
+ 1de:	3a 0b                	cmp    (%rbx),%cl
+ 1e0:	3b 0b                	cmp    (%rbx),%ecx
+ 1e2:	27                   	(bad)  
+ 1e3:	19 49 13             	sbb    %ecx,0x13(%rcx)
+ 1e6:	11 01                	adc    %eax,(%rcx)
+ 1e8:	12 07                	adc    (%rdi),%al
+ 1ea:	40 18 96 42 19 00 00 	sbb    %dl,0x1942(%rsi)
+ 1f1:	23 2e                	and    (%rsi),%ebp
+ 1f3:	01 3f                	add    %edi,(%rdi)
+ 1f5:	19 03                	sbb    %eax,(%rbx)
+ 1f7:	0e                   	(bad)  
+ 1f8:	3a 0b                	cmp    (%rbx),%cl
+ 1fa:	3b 0b                	cmp    (%rbx),%ecx
+ 1fc:	49 13 3c 19          	adc    (%r9,%rbx,1),%rdi
+ 200:	01 13                	add    %edx,(%rbx)
+ 202:	00 00                	add    %al,(%rax)
+	...
+
+Disassembly of section .debug_aranges:
+
+0000000000000000 <.debug_aranges>:
+   0:	2c 00                	sub    $0x0,%al
+   2:	00 00                	add    %al,(%rax)
+   4:	02 00                	add    (%rax),%al
+   6:	00 00                	add    %al,(%rax)
+   8:	00 00                	add    %al,(%rax)
+   a:	08 00                	or     %al,(%rax)
+	...
+  18:	f4                   	hlt    
+  19:	05 00 00 00 00       	add    $0x0,%eax
+	...
+
+Disassembly of section .debug_line:
+
+0000000000000000 <.debug_line>:
+   0:	35 02 00 00 02       	xor    $0x2000002,%eax
+   5:	00 6e 01             	add    %ch,0x1(%rsi)
+   8:	00 00                	add    %al,(%rax)
+   a:	01 01                	add    %eax,(%rcx)
+   c:	fb                   	sti    
+   d:	0e                   	(bad)  
+   e:	0d 00 01 01 01       	or     $0x1010100,%eax
+  13:	01 00                	add    %eax,(%rax)
+  15:	00 00                	add    %al,(%rax)
+  17:	01 00                	add    %eax,(%rax)
+  19:	00 01                	add    %al,(%rcx)
+  1b:	2f                   	(bad)  
+  1c:	68 6f 6d 65 2f       	pushq  $0x2f656d6f
+  21:	7a 69                	jp     8c <.debug_line+0x8c>
+  23:	79 61                	jns    86 <.debug_line+0x86>
+  25:	64 2f                	fs (bad) 
+  27:	50                   	push   %rax
+  28:	72 6f                	jb     99 <.debug_line+0x99>
+  2a:	6a 65                	pushq  $0x65
+  2c:	63 74 73 2f          	movslq 0x2f(%rbx,%rsi,2),%esi
+  30:	4f 70 65             	rex.WRXB jo 98 <.debug_line+0x98>
+  33:	72 61                	jb     96 <.debug_line+0x96>
+  35:	74 69                	je     a0 <.debug_line+0xa0>
+  37:	6e                   	outsb  %ds:(%rsi),(%dx)
+  38:	67 20 73 79          	and    %dh,0x79(%ebx)
+  3c:	73 74                	jae    b2 <.debug_line+0xb2>
+  3e:	65 6d                	gs insl (%dx),%es:(%rdi)
+  40:	73 2f                	jae    71 <.debug_line+0x71>
+  42:	55                   	push   %rbp
+  43:	6e                   	outsb  %ds:(%rsi),(%dx)
+  44:	69 78 20 53 68 65 6c 	imul   $0x6c656853,0x20(%rax),%edi
+  4b:	6c                   	insb   (%dx),%es:(%rdi)
+  4c:	00 2f                	add    %ch,(%rdi)
+  4e:	75 73                	jne    c3 <.debug_line+0xc3>
+  50:	72 2f                	jb     81 <.debug_line+0x81>
+  52:	6c                   	insb   (%dx),%es:(%rdi)
+  53:	69 62 2f 67 63 63 2f 	imul   $0x2f636367,0x2f(%rdx),%esp
+  5a:	78 38                	js     94 <.debug_line+0x94>
+  5c:	36 5f                	ss pop %rdi
+  5e:	36 34 2d             	ss xor $0x2d,%al
+  61:	6c                   	insb   (%dx),%es:(%rdi)
+  62:	69 6e 75 78 2d 67 6e 	imul   $0x6e672d78,0x75(%rsi),%ebp
+  69:	75 2f                	jne    9a <.debug_line+0x9a>
+  6b:	37                   	(bad)  
+  6c:	2f                   	(bad)  
+  6d:	69 6e 63 6c 75 64 65 	imul   $0x6564756c,0x63(%rsi),%ebp
+  74:	00 2f                	add    %ch,(%rdi)
+  76:	75 73                	jne    eb <.debug_line+0xeb>
+  78:	72 2f                	jb     a9 <.debug_line+0xa9>
+  7a:	69 6e 63 6c 75 64 65 	imul   $0x6564756c,0x63(%rsi),%ebp
+  81:	2f                   	(bad)  
+  82:	78 38                	js     bc <.debug_line+0xbc>
+  84:	36 5f                	ss pop %rdi
+  86:	36 34 2d             	ss xor $0x2d,%al
+  89:	6c                   	insb   (%dx),%es:(%rdi)
+  8a:	69 6e 75 78 2d 67 6e 	imul   $0x6e672d78,0x75(%rsi),%ebp
+  91:	75 2f                	jne    c2 <.debug_line+0xc2>
+  93:	62                   	(bad)  
+  94:	69 74 73 00 2f 75 73 	imul   $0x7273752f,0x0(%rbx,%rsi,2),%esi
+  9b:	72 
+  9c:	2f                   	(bad)  
+  9d:	69 6e 63 6c 75 64 65 	imul   $0x6564756c,0x63(%rsi),%ebp
+  a4:	2f                   	(bad)  
+  a5:	78 38                	js     df <.debug_line+0xdf>
+  a7:	36 5f                	ss pop %rdi
+  a9:	36 34 2d             	ss xor $0x2d,%al
+  ac:	6c                   	insb   (%dx),%es:(%rdi)
+  ad:	69 6e 75 78 2d 67 6e 	imul   $0x6e672d78,0x75(%rsi),%ebp
+  b4:	75 2f                	jne    e5 <.debug_line+0xe5>
+  b6:	62                   	(bad)  
+  b7:	69 74 73 2f 74 79 70 	imul   $0x65707974,0x2f(%rbx,%rsi,2),%esi
+  be:	65 
+  bf:	73 00                	jae    c1 <.debug_line+0xc1>
+  c1:	2f                   	(bad)  
+  c2:	75 73                	jne    137 <.debug_line+0x137>
+  c4:	72 2f                	jb     f5 <.debug_line+0xf5>
+  c6:	69 6e 63 6c 75 64 65 	imul   $0x6564756c,0x63(%rsi),%ebp
+  cd:	00 2f                	add    %ch,(%rdi)
+  cf:	75 73                	jne    144 <.debug_line+0x144>
+  d1:	72 2f                	jb     102 <.debug_line+0x102>
+  d3:	69 6e 63 6c 75 64 65 	imul   $0x6564756c,0x63(%rsi),%ebp
+  da:	2f                   	(bad)  
+  db:	78 38                	js     115 <.debug_line+0x115>
+  dd:	36 5f                	ss pop %rdi
+  df:	36 34 2d             	ss xor $0x2d,%al
+  e2:	6c                   	insb   (%dx),%es:(%rdi)
+  e3:	69 6e 75 78 2d 67 6e 	imul   $0x6e672d78,0x75(%rsi),%ebp
+  ea:	75 2f                	jne    11b <.debug_line+0x11b>
+  ec:	73 79                	jae    167 <.debug_line+0x167>
+  ee:	73 00                	jae    f0 <.debug_line+0xf0>
+  f0:	00 6d 61             	add    %ch,0x61(%rbp)
+  f3:	69 6e 2e 63 00 01 00 	imul   $0x10063,0x2e(%rsi),%ebp
+  fa:	00 73 74             	add    %dh,0x74(%rbx)
+  fd:	64 64 65 66 2e 68 00 	fs fs gs cs pushw $0x200
+ 104:	02 
+ 105:	00 00                	add    %al,(%rax)
+ 107:	74 79                	je     182 <.debug_line+0x182>
+ 109:	70 65                	jo     170 <.debug_line+0x170>
+ 10b:	73 2e                	jae    13b <.debug_line+0x13b>
+ 10d:	68 00 03 00 00       	pushq  $0x300
+ 112:	6c                   	insb   (%dx),%es:(%rdi)
+ 113:	69 62 69 6f 2e 68 00 	imul   $0x682e6f,0x69(%rdx),%esp
+ 11a:	03 00                	add    (%rax),%eax
+ 11c:	00 46 49             	add    %al,0x49(%rsi)
+ 11f:	4c                   	rex.WR
+ 120:	45                   	rex.RB
+ 121:	2e 68 00 04 00 00    	cs pushq $0x400
+ 127:	73 74                	jae    19d <.debug_line+0x19d>
+ 129:	64 69 6f 2e 68 00 05 	imul   $0x50068,%fs:0x2e(%rdi),%ebp
+ 130:	00 
+ 131:	00 73 79             	add    %dh,0x79(%rbx)
+ 134:	73 5f                	jae    195 <.debug_line+0x195>
+ 136:	65 72 72             	gs jb  1ab <.debug_line+0x1ab>
+ 139:	6c                   	insb   (%dx),%es:(%rdi)
+ 13a:	69 73 74 2e 68 00 03 	imul   $0x300682e,0x74(%rbx),%esi
+ 141:	00 00                	add    %al,(%rax)
+ 143:	74 79                	je     1be <.debug_line+0x1be>
+ 145:	70 65                	jo     1ac <.debug_line+0x1ac>
+ 147:	73 2e                	jae    177 <.debug_line+0x177>
+ 149:	68 00 06 00 00       	pushq  $0x600
+ 14e:	75 6e                	jne    1be <.debug_line+0x1be>
+ 150:	69 73 74 64 2e 68 00 	imul   $0x682e64,0x74(%rbx),%esi
+ 157:	05 00 00 67 65       	add    $0x65670000,%eax
+ 15c:	74 6f                	je     1cd <.debug_line+0x1cd>
+ 15e:	70 74                	jo     1d4 <.debug_line+0x1d4>
+ 160:	5f                   	pop    %rdi
+ 161:	63 6f 72             	movslq 0x72(%rdi),%ebp
+ 164:	65 2e 68 00 03 00 00 	gs cs pushq $0x300
+ 16b:	73 69                	jae    1d6 <.debug_line+0x1d6>
+ 16d:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 16f:	61                   	(bad)  
+ 170:	6c                   	insb   (%dx),%es:(%rdi)
+ 171:	2e 68 00 05 00 00    	cs pushq $0x500
+ 177:	00 00                	add    %al,(%rax)
+ 179:	09 02                	or     %eax,(%rdx)
+	...
+ 183:	03 10                	add    (%rax),%edx
+ 185:	01 08                	add    %ecx,(%rax)
+ 187:	3d 08 13 08 ad       	cmp    $0xad081308,%eax
+ 18c:	59                   	pop    %rcx
+ 18d:	31 bb 08 ad 08 13    	xor    %edi,0x1308ad08(%rbx)
+ 193:	00 02                	add    %al,(%rdx)
+ 195:	04 01                	add    $0x1,%al
+ 197:	06                   	(bad)  
+ 198:	08 66 06             	or     %ah,0x6(%rsi)
+ 19b:	76 bb                	jbe    158 <.debug_line+0x158>
+ 19d:	a0 08 68 77 2d 75 3f 	movabs 0x75833f752d776808,%al
+ 1a4:	83 75 
+ 1a6:	30 48 08             	xor    %cl,0x8(%rax)
+ 1a9:	40                   	rex
+ 1aa:	f3 3f                	repz (bad) 
+ 1ac:	08 12                	or     %dl,(%rdx)
+ 1ae:	e6 cb                	out    %al,$0xcb
+ 1b0:	67 08 9f 08 13 08 69 	or     %bl,0x69081308(%edi)
+ 1b7:	08 4b 75             	or     %cl,0x75(%rbx)
+ 1ba:	75 02                	jne    1be <.debug_line+0x1be>
+ 1bc:	2b 13                	sub    (%rbx),%edx
+ 1be:	9f                   	lahf   
+ 1bf:	08 ae bb a1 02 2f    	or     %ch,0x2f02a1bb(%rsi)
+ 1c5:	15 30 02 2a 14       	adc    $0x142a0230,%eax
+ 1ca:	bc 9f 4b 03 78       	mov    $0x78034b9f,%esp
+ 1cf:	02 29                	add    (%rcx),%ch
+ 1d1:	01 03                	add    %eax,(%rbx)
+ 1d3:	0b 08                	or     (%rax),%ecx
+ 1d5:	e4 92                	in     $0x92,%al
+ 1d7:	02 2a                	add    (%rdx),%ch
+ 1d9:	14 08                	adc    $0x8,%al
+ 1db:	13 02                	adc    (%rdx),%eax
+ 1dd:	2f                   	(bad)  
+ 1de:	0d 00 02 04 01       	or     $0x1040200,%eax
+ 1e3:	06                   	(bad)  
+ 1e4:	4a 06                	rex.WX (bad) 
+ 1e6:	a5                   	movsl  %ds:(%rsi),%es:(%rdi)
+ 1e7:	23 59 78             	and    0x78(%rcx),%ebx
+ 1ea:	e7 d7                	out    %eax,$0xd7
+ 1ec:	08 67 93             	or     %ah,-0x6d(%rdi)
+ 1ef:	08 68 75             	or     %ch,0x75(%rax)
+ 1f2:	ad                   	lods   %ds:(%rsi),%eax
+ 1f3:	75 32                	jne    227 <.debug_line+0x227>
+ 1f5:	08 2f                	or     %ch,(%rdi)
+ 1f7:	bd 75 03 77 d6       	mov    $0xd6770375,%ebp
+ 1fc:	03 0a                	add    (%rdx),%ecx
+ 1fe:	20 31                	and    %dh,(%rcx)
+ 200:	08 74 e9 9f          	or     %dh,-0x61(%rcx,%rbp,8)
+ 204:	08 30                	or     %dh,(%rax)
+ 206:	08 a0 03 1c 58 e6    	or     %ah,-0x19a7e3fd(%rax)
+ 20c:	08 a1 ae 92 ad 08    	or     %ah,0x8ad92ae(%rcx)
+ 212:	c9                   	leaveq 
+ 213:	bc a1 c9 08 13       	mov    $0x1308c9a1,%esp
+ 218:	03 0b                	add    (%rbx),%ecx
+ 21a:	58                   	pop    %rax
+ 21b:	08 a1 af 93 ae 08    	or     %ah,0x8ae93af(%rcx)
+ 221:	c9                   	leaveq 
+ 222:	bc a1 91 08 13       	mov    $0x130891a1,%esp
+ 227:	33 03                	xor    (%rbx),%eax
+ 229:	af                   	scas   %es:(%rdi),%eax
+ 22a:	7f 08                	jg     234 <.debug_line+0x234>
+ 22c:	66 03 d8             	add    %ax,%bx
+ 22f:	00 02                	add    %al,(%rdx)
+ 231:	25 01 75 02 16       	and    $0x16027501,%eax
+ 236:	00 01                	add    %al,(%rcx)
+ 238:	01                   	.byte 0x1
+
+Disassembly of section .debug_str:
+
+0000000000000000 <.debug_str>:
+   0:	6f                   	outsl  %ds:(%rsi),(%dx)
+   1:	70 74                	jo     77 <.debug_str+0x77>
+   3:	69 6e 64 00 6f 70 74 	imul   $0x74706f00,0x64(%rsi),%ebp
+   a:	61                   	(bad)  
+   b:	72 67                	jb     74 <.debug_str+0x74>
+   d:	00 5f 6f             	add    %bl,0x6f(%rdi)
+  10:	6c                   	insb   (%dx),%es:(%rdi)
+  11:	64 5f                	fs pop %rdi
+  13:	6f                   	outsl  %ds:(%rsi),(%dx)
+  14:	66 66 73 65          	data16 data16 jae 7d <.debug_str+0x7d>
+  18:	74 00                	je     1a <.debug_str+0x1a>
+  1a:	72 65                	jb     81 <.debug_str+0x81>
+  1c:	61                   	(bad)  
+  1d:	64 5f                	fs pop %rdi
+  1f:	70 61                	jo     82 <.debug_str+0x82>
+  21:	72 73                	jb     96 <.debug_str+0x96>
+  23:	65 5f                	gs pop %rdi
+  25:	6c                   	insb   (%dx),%es:(%rdi)
+  26:	69 6e 65 00 70 72 6f 	imul   $0x6f727000,0x65(%rsi),%ebp
+  2d:	63 65 73             	movslq 0x73(%rbp),%esp
+  30:	73 6c                	jae    9e <.debug_str+0x9e>
+  32:	69 6e 65 00 73 79 73 	imul   $0x73797300,0x65(%rsi),%ebp
+  39:	5f                   	pop    %rdi
+  3a:	6e                   	outsb  %ds:(%rsi),(%dx)
+  3b:	65 72 72             	gs jb  b0 <.debug_str+0xb0>
+  3e:	00 5f 49             	add    %bl,0x49(%rdi)
+  41:	4f 5f                	rex.WRXB pop %r15
+  43:	73 61                	jae    a6 <.debug_str+0xa6>
+  45:	76 65                	jbe    ac <.debug_str+0xac>
+  47:	5f                   	pop    %rdi
+  48:	65 6e                	outsb  %gs:(%rsi),(%dx)
+  4a:	64 00 72 65          	add    %dh,%fs:0x65(%rdx)
+  4e:	6d                   	insl   (%dx),%es:(%rdi)
+  4f:	6f                   	outsl  %ds:(%rsi),(%dx)
+  50:	76 65                	jbe    b7 <.debug_str+0xb7>
+  52:	5f                   	pop    %rdi
+  53:	65 6e                	outsb  %gs:(%rsi),(%dx)
+  55:	64 6f                	outsl  %fs:(%rsi),(%dx)
+  57:	66 6c                	data16 insb (%dx),%es:(%rdi)
+  59:	69 6e 65 00 73 69 7a 	imul   $0x7a697300,0x65(%rsi),%ebp
+  60:	65 5f                	gs pop %rdi
+  62:	74 00                	je     64 <.debug_str+0x64>
+  64:	5f                   	pop    %rdi
+  65:	6f                   	outsl  %ds:(%rsi),(%dx)
+  66:	66 66 73 65          	data16 data16 jae cf <.debug_str+0xcf>
+  6a:	74 00                	je     6c <.debug_str+0x6c>
+  6c:	5f                   	pop    %rdi
+  6d:	5f                   	pop    %rdi
+  6e:	70 69                	jo     d9 <.debug_str+0xd9>
+  70:	64 5f                	fs pop %rdi
+  72:	74 00                	je     74 <.debug_str+0x74>
+  74:	5f                   	pop    %rdi
+  75:	49                   	rex.WB
+  76:	4f 5f                	rex.WRXB pop %r15
+  78:	77 72                	ja     ec <.debug_str+0xec>
+  7a:	69 74 65 5f 70 74 72 	imul   $0x727470,0x5f(%rbp,%riz,2),%esi
+  81:	00 
+  82:	6d                   	insl   (%dx),%es:(%rdi)
+  83:	61                   	(bad)  
+  84:	69 6e 00 72 65 61 64 	imul   $0x64616572,0x0(%rsi),%ebp
+  8b:	6c                   	insb   (%dx),%es:(%rdi)
+  8c:	69 6e 65 00 5f 49 4f 	imul   $0x4f495f00,0x65(%rsi),%ebp
+  93:	5f                   	pop    %rdi
+  94:	62                   	(bad)  
+  95:	75 66                	jne    fd <.debug_str+0xfd>
+  97:	5f                   	pop    %rdi
+  98:	62 61                	(bad)  
+  9a:	73 65                	jae    101 <.debug_str+0x101>
+  9c:	00 66 69             	add    %ah,0x69(%rsi)
+  9f:	6c                   	insb   (%dx),%es:(%rdi)
+  a0:	65 00 6d 65          	add    %ch,%gs:0x65(%rbp)
+  a4:	73 73                	jae    119 <.debug_str+0x119>
+  a6:	61                   	(bad)  
+  a7:	67 65 00 5f 5f       	add    %bl,%gs:0x5f(%edi)
+  ac:	65 6e                	outsb  %gs:(%rsi),(%dx)
+  ae:	76 69                	jbe    119 <.debug_str+0x119>
+  b0:	72 6f                	jb     121 <.debug_str+0x121>
+  b2:	6e                   	outsb  %ds:(%rsi),(%dx)
+  b3:	00 5f 6d             	add    %bl,0x6d(%rdi)
+  b6:	61                   	(bad)  
+  b7:	72 6b                	jb     124 <.debug_str+0x124>
+  b9:	65 72 73             	gs jb  12f <.debug_str+0x12f>
+  bc:	00 73 79             	add    %dh,0x79(%rbx)
+  bf:	73 5f                	jae    120 <.debug_str+0x120>
+  c1:	73 69                	jae    12c <.debug_str+0x12c>
+  c3:	67 6c                	insb   (%dx),%es:(%edi)
+  c5:	69 73 74 00 69 6e 70 	imul   $0x706e6900,0x74(%rbx),%esi
+  cc:	75 74                	jne    142 <.debug_str+0x142>
+  ce:	61                   	(bad)  
+  cf:	72 67                	jb     138 <.debug_str+0x138>
+  d1:	73 00                	jae    d3 <.debug_str+0xd3>
+  d3:	6f                   	outsl  %ds:(%rsi),(%dx)
+  d4:	70 74                	jo     14a <.debug_str+0x14a>
+  d6:	65 72 72             	gs jb  14b <.debug_str+0x14b>
+  d9:	00 2f                	add    %ch,(%rdi)
+  db:	68 6f 6d 65 2f       	pushq  $0x2f656d6f
+  e0:	7a 69                	jp     14b <.debug_str+0x14b>
+  e2:	79 61                	jns    145 <.debug_str+0x145>
+  e4:	64 2f                	fs (bad) 
+  e6:	50                   	push   %rax
+  e7:	72 6f                	jb     158 <.debug_str+0x158>
+  e9:	6a 65                	pushq  $0x65
+  eb:	63 74 73 2f          	movslq 0x2f(%rbx,%rsi,2),%esi
+  ef:	4f 70 65             	rex.WRXB jo 157 <.debug_str+0x157>
+  f2:	72 61                	jb     155 <.debug_str+0x155>
+  f4:	74 69                	je     15f <.debug_str+0x15f>
+  f6:	6e                   	outsb  %ds:(%rsi),(%dx)
+  f7:	67 20 73 79          	and    %dh,0x79(%ebx)
+  fb:	73 74                	jae    171 <.debug_str+0x171>
+  fd:	65 6d                	gs insl (%dx),%es:(%rdi)
+  ff:	73 2f                	jae    130 <.debug_str+0x130>
+ 101:	55                   	push   %rbp
+ 102:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 103:	69 78 20 53 68 65 6c 	imul   $0x6c656853,0x20(%rax),%edi
+ 10a:	6c                   	insb   (%dx),%es:(%rdi)
+ 10b:	00 6c 69 6e          	add    %ch,0x6e(%rcx,%rbp,2)
+ 10f:	65 00 68 6f          	add    %ch,%gs:0x6f(%rax)
+ 113:	6d                   	insl   (%dx),%es:(%rdi)
+ 114:	65 00 47 4e          	add    %al,%gs:0x4e(%rdi)
+ 118:	55                   	push   %rbp
+ 119:	20 43 31             	and    %al,0x31(%rbx)
+ 11c:	31 20                	xor    %esp,(%rax)
+ 11e:	37                   	(bad)  
+ 11f:	2e 33 2e             	xor    %cs:(%rsi),%ebp
+ 122:	30 20                	xor    %ah,(%rax)
+ 124:	2d 6d 74 75 6e       	sub    $0x6e75746d,%eax
+ 129:	65 3d 67 65 6e 65    	gs cmp $0x656e6567,%eax
+ 12f:	72 69                	jb     19a <.debug_str+0x19a>
+ 131:	63 20                	movslq (%rax),%esp
+ 133:	2d 6d 61 72 63       	sub    $0x6372616d,%eax
+ 138:	68 3d 78 38 36       	pushq  $0x3638783d
+ 13d:	2d 36 34 20 2d       	sub    $0x2d203436,%eax
+ 142:	67 20 2d 66 73 74 61 	and    %ch,0x61747366(%eip)        # 617474af <main+0x617470a2>
+ 149:	63 6b 2d             	movslq 0x2d(%rbx),%ebp
+ 14c:	70 72                	jo     1c0 <.debug_str+0x1c0>
+ 14e:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 14f:	74 65                	je     1b6 <.debug_str+0x1b6>
+ 151:	63 74 6f 72          	movslq 0x72(%rdi,%rbp,2),%esi
+ 155:	2d 73 74 72 6f       	sub    $0x6f727473,%eax
+ 15a:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 15b:	67 00 73 68          	add    %dh,0x68(%ebx)
+ 15f:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 160:	72 74                	jb     1d6 <.debug_str+0x1d6>
+ 162:	20 69 6e             	and    %ch,0x6e(%rcx)
+ 165:	74 00                	je     167 <.debug_str+0x167>
+ 167:	73 74                	jae    1dd <.debug_str+0x1dd>
+ 169:	64 65 72 72          	fs gs jb 1df <.debug_str+0x1df>
+ 16d:	00 6c 6f 6e          	add    %ch,0x6e(%rdi,%rbp,2)
+ 171:	67 20 6c 6f 6e       	and    %ch,0x6e(%edi,%ebp,2)
+ 176:	67 20 69 6e          	and    %ch,0x6e(%ecx)
+ 17a:	74 00                	je     17c <.debug_str+0x17c>
+ 17c:	5f                   	pop    %rdi
+ 17d:	6c                   	insb   (%dx),%es:(%rdi)
+ 17e:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 17f:	63 6b 00             	movslq 0x0(%rbx),%ebp
+ 182:	6c                   	insb   (%dx),%es:(%rdi)
+ 183:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 184:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 185:	67 20 69 6e          	and    %ch,0x6e(%ecx)
+ 189:	74 00                	je     18b <.debug_str+0x18b>
+ 18b:	72 65                	jb     1f2 <.debug_str+0x1f2>
+ 18d:	73 75                	jae    204 <.debug_str+0x204>
+ 18f:	6c                   	insb   (%dx),%es:(%rdi)
+ 190:	74 00                	je     192 <.debug_str+0x192>
+ 192:	5f                   	pop    %rdi
+ 193:	63 75 72             	movslq 0x72(%rbp),%esi
+ 196:	5f                   	pop    %rdi
+ 197:	63 6f 6c             	movslq 0x6c(%rdi),%ebp
+ 19a:	75 6d                	jne    209 <.debug_str+0x209>
+ 19c:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 19d:	00 5f 49             	add    %bl,0x49(%rdi)
+ 1a0:	4f 5f                	rex.WRXB pop %r15
+ 1a2:	32 5f 31             	xor    0x31(%rdi),%bl
+ 1a5:	5f                   	pop    %rdi
+ 1a6:	73 74                	jae    21c <.debug_str+0x21c>
+ 1a8:	64 65 72 72          	fs gs jb 21e <.debug_str+0x21e>
+ 1ac:	5f                   	pop    %rdi
+ 1ad:	00 5f 49             	add    %bl,0x49(%rdi)
+ 1b0:	4f 5f                	rex.WRXB pop %r15
+ 1b2:	46                   	rex.RX
+ 1b3:	49                   	rex.WB
+ 1b4:	4c                   	rex.WR
+ 1b5:	45 5f                	rex.RB pop %r15
+ 1b7:	70 6c                	jo     225 <.debug_str+0x225>
+ 1b9:	75 73                	jne    22e <.debug_str+0x22e>
+ 1bb:	00 2f                	add    %ch,(%rdi)
+ 1bd:	68 6f 6d 65 2f       	pushq  $0x2f656d6f
+ 1c2:	7a 69                	jp     22d <.debug_str+0x22d>
+ 1c4:	79 61                	jns    227 <.debug_str+0x227>
+ 1c6:	64 2f                	fs (bad) 
+ 1c8:	50                   	push   %rax
+ 1c9:	72 6f                	jb     23a <.debug_str+0x23a>
+ 1cb:	6a 65                	pushq  $0x65
+ 1cd:	63 74 73 2f          	movslq 0x2f(%rbx,%rsi,2),%esi
+ 1d1:	4f 70 65             	rex.WRXB jo 239 <.debug_str+0x239>
+ 1d4:	72 61                	jb     237 <.debug_str+0x237>
+ 1d6:	74 69                	je     241 <.debug_str+0x241>
+ 1d8:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 1d9:	67 20 73 79          	and    %dh,0x79(%ebx)
+ 1dd:	73 74                	jae    253 <.debug_str+0x253>
+ 1df:	65 6d                	gs insl (%dx),%es:(%rdi)
+ 1e1:	73 2f                	jae    212 <.debug_str+0x212>
+ 1e3:	55                   	push   %rbp
+ 1e4:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 1e5:	69 78 20 53 68 65 6c 	imul   $0x6c656853,0x20(%rax),%edi
+ 1ec:	6c                   	insb   (%dx),%es:(%rdi)
+ 1ed:	2f                   	(bad)  
+ 1ee:	6d                   	insl   (%dx),%es:(%rdi)
+ 1ef:	61                   	(bad)  
+ 1f0:	69 6e 2e 63 00 61 72 	imul   $0x72610063,0x2e(%rsi),%ebp
+ 1f7:	67 76 00             	addr32 jbe 1fa <.debug_str+0x1fa>
+ 1fa:	5f                   	pop    %rdi
+ 1fb:	73 62                	jae    25f <.debug_str+0x25f>
+ 1fd:	75 66                	jne    265 <.debug_str+0x265>
+ 1ff:	00 5f 49             	add    %bl,0x49(%rdi)
+ 202:	4f 5f                	rex.WRXB pop %r15
+ 204:	46                   	rex.RX
+ 205:	49                   	rex.WB
+ 206:	4c                   	rex.WR
+ 207:	45 00 75 6e          	add    %r14b,0x6e(%r13)
+ 20b:	73 69                	jae    276 <.debug_str+0x276>
+ 20d:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 20f:	65 64 20 63 68       	gs and %ah,%fs:0x68(%rbx)
+ 214:	61                   	(bad)  
+ 215:	72 00                	jb     217 <.debug_str+0x217>
+ 217:	5f                   	pop    %rdi
+ 218:	5f                   	pop    %rdi
+ 219:	70 61                	jo     27c <.debug_str+0x27c>
+ 21b:	64 34 00             	fs xor $0x0,%al
+ 21e:	61                   	(bad)  
+ 21f:	72 67                	jb     288 <.debug_str+0x288>
+ 221:	63 00                	movslq (%rax),%eax
+ 223:	73 69                	jae    28e <.debug_str+0x28e>
+ 225:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 227:	65 64 20 63 68       	gs and %ah,%fs:0x68(%rbx)
+ 22c:	61                   	(bad)  
+ 22d:	72 00                	jb     22f <.debug_str+0x22f>
+ 22f:	6c                   	insb   (%dx),%es:(%rdi)
+ 230:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 231:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 232:	67 20 6c 6f 6e       	and    %ch,0x6e(%edi,%ebp,2)
+ 237:	67 20 75 6e          	and    %dh,0x6e(%ebp)
+ 23b:	73 69                	jae    2a6 <.debug_str+0x2a6>
+ 23d:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 23f:	65 64 20 69 6e       	gs and %ch,%fs:0x6e(%rcx)
+ 244:	74 00                	je     246 <.debug_str+0x246>
+ 246:	5f                   	pop    %rdi
+ 247:	73 68                	jae    2b1 <.debug_str+0x2b1>
+ 249:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 24a:	72 74                	jb     2c0 <.debug_str+0x2c0>
+ 24c:	62                   	(bad)  
+ 24d:	75 66                	jne    2b5 <.debug_str+0x2b5>
+ 24f:	00 75 6e             	add    %dh,0x6e(%rbp)
+ 252:	73 69                	jae    2bd <.debug_str+0x2bd>
+ 254:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 256:	65 64 20 69 6e       	gs and %ch,%fs:0x6e(%rcx)
+ 25b:	74 00                	je     25d <.debug_str+0x25d>
+ 25d:	5f                   	pop    %rdi
+ 25e:	49                   	rex.WB
+ 25f:	4f 5f                	rex.WRXB pop %r15
+ 261:	6d                   	insl   (%dx),%es:(%rdi)
+ 262:	61                   	(bad)  
+ 263:	72 6b                	jb     2d0 <.debug_str+0x2d0>
+ 265:	65 72 00             	gs jb  268 <.debug_str+0x268>
+ 268:	5f                   	pop    %rdi
+ 269:	49                   	rex.WB
+ 26a:	4f 5f                	rex.WRXB pop %r15
+ 26c:	32 5f 31             	xor    0x31(%rdi),%bl
+ 26f:	5f                   	pop    %rdi
+ 270:	73 74                	jae    2e6 <.debug_str+0x2e6>
+ 272:	64 69 6e 5f 00 69 6e 	imul   $0x706e6900,%fs:0x5f(%rsi),%ebp
+ 279:	70 
+ 27a:	75 74                	jne    2f0 <.debug_str+0x2f0>
+ 27c:	61                   	(bad)  
+ 27d:	72 67                	jb     2e6 <.debug_str+0x2e6>
+ 27f:	73 32                	jae    2b3 <.debug_str+0x2b3>
+ 281:	00 61 72             	add    %ah,0x72(%rcx)
+ 284:	67 73 00             	addr32 jae 287 <.debug_str+0x287>
+ 287:	5f                   	pop    %rdi
+ 288:	49                   	rex.WB
+ 289:	4f 5f                	rex.WRXB pop %r15
+ 28b:	72 65                	jb     2f2 <.debug_str+0x2f2>
+ 28d:	61                   	(bad)  
+ 28e:	64 5f                	fs pop %rdi
+ 290:	65 6e                	outsb  %gs:(%rsi),(%dx)
+ 292:	64 00 61 72          	add    %ah,%fs:0x72(%rcx)
+ 296:	67 73 32             	addr32 jae 2cb <.debug_str+0x2cb>
+ 299:	00 5f 49             	add    %bl,0x49(%rdi)
+ 29c:	4f 5f                	rex.WRXB pop %r15
+ 29e:	77 72                	ja     312 <.debug_str+0x312>
+ 2a0:	69 74 65 5f 62 61 73 	imul   $0x65736162,0x5f(%rbp,%riz,2),%esi
+ 2a7:	65 
+ 2a8:	00 5f 75             	add    %bl,0x75(%rdi)
+ 2ab:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 2ac:	75 73                	jne    321 <.debug_str+0x321>
+ 2ae:	65 64 32 00          	gs xor %fs:(%rax),%al
+ 2b2:	5f                   	pop    %rdi
+ 2b3:	73 79                	jae    32e <.debug_str+0x32e>
+ 2b5:	73 5f                	jae    316 <.debug_str+0x316>
+ 2b7:	73 69                	jae    322 <.debug_str+0x322>
+ 2b9:	67 6c                	insb   (%dx),%es:(%edi)
+ 2bb:	69 73 74 00 73 74 61 	imul   $0x61747300,0x74(%rbx),%esi
+ 2c2:	74 75                	je     339 <.debug_str+0x339>
+ 2c4:	73 00                	jae    2c6 <.debug_str+0x2c6>
+ 2c6:	5f                   	pop    %rdi
+ 2c7:	49                   	rex.WB
+ 2c8:	4f 5f                	rex.WRXB pop %r15
+ 2ca:	62                   	(bad)  
+ 2cb:	75 66                	jne    333 <.debug_str+0x333>
+ 2cd:	5f                   	pop    %rdi
+ 2ce:	65 6e                	outsb  %gs:(%rsi),(%dx)
+ 2d0:	64 00 73 69          	add    %dh,%fs:0x69(%rbx)
+ 2d4:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 2d6:	61                   	(bad)  
+ 2d7:	6c                   	insb   (%dx),%es:(%rdi)
+ 2d8:	68 61 6e 64 6c       	pushq  $0x6c646e61
+ 2dd:	65 72 00             	gs jb  2e0 <.debug_str+0x2e0>
+ 2e0:	63 68 61             	movslq 0x61(%rax),%ebp
+ 2e3:	72 00                	jb     2e5 <.debug_str+0x2e5>
+ 2e5:	5f                   	pop    %rdi
+ 2e6:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 2e7:	65 78 74             	gs js  35e <.debug_str+0x35e>
+ 2ea:	00 5f 5f             	add    %bl,0x5f(%rdi)
+ 2ed:	70 61                	jo     350 <.debug_str+0x350>
+ 2ef:	64 31 00             	xor    %eax,%fs:(%rax)
+ 2f2:	5f                   	pop    %rdi
+ 2f3:	5f                   	pop    %rdi
+ 2f4:	70 61                	jo     357 <.debug_str+0x357>
+ 2f6:	64 32 00             	xor    %fs:(%rax),%al
+ 2f9:	5f                   	pop    %rdi
+ 2fa:	5f                   	pop    %rdi
+ 2fb:	70 61                	jo     35e <.debug_str+0x35e>
+ 2fd:	64 33 00             	xor    %fs:(%rax),%eax
+ 300:	5f                   	pop    %rdi
+ 301:	42 6f                	rex.X outsl %ds:(%rsi),(%dx)
+ 303:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 304:	6c                   	insb   (%dx),%es:(%rdi)
+ 305:	00 5f 5f             	add    %bl,0x5f(%rdi)
+ 308:	70 61                	jo     36b <.debug_str+0x36b>
+ 30a:	64 35 00 62 61 63    	fs xor $0x63616200,%eax
+ 310:	6b 67 72 6f          	imul   $0x6f,0x72(%rdi),%esp
+ 314:	75 6e                	jne    384 <.debug_str+0x384>
+ 316:	64 5f                	fs pop %rdi
+ 318:	70 72                	jo     38c <.debug_str+0x38c>
+ 31a:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 31b:	63 65 73             	movslq 0x73(%rbp),%esp
+ 31e:	73 5f                	jae    37f <.debug_str+0x37f>
+ 320:	69 64 00 4c 6f 67 43 	imul   $0x7243676f,0x4c(%rax,%rax,1),%esp
+ 327:	72 
+ 328:	65 61                	gs (bad) 
+ 32a:	74 65                	je     391 <.debug_str+0x391>
+ 32c:	64 00 73 68          	add    %dh,%fs:0x68(%rbx)
+ 330:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 331:	72 74                	jb     3a7 <.debug_str+0x3a7>
+ 333:	20 75 6e             	and    %dh,0x6e(%rbp)
+ 336:	73 69                	jae    3a1 <.debug_str+0x3a1>
+ 338:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 33a:	65 64 20 69 6e       	gs and %ch,%fs:0x6e(%rcx)
+ 33f:	74 00                	je     341 <.debug_str+0x341>
+ 341:	6c                   	insb   (%dx),%es:(%rdi)
+ 342:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 343:	6e                   	outsb  %ds:(%rsi),(%dx)
+ 344:	67 20 75 6e          	and    %dh,0x6e(%ebp)
+ 348:	73 69                	jae    3b3 <.debug_str+0x3b3>
+ 34a:	67 6e                	outsb  %ds:(%esi),(%dx)
+ 34c:	65 64 20 69 6e       	gs and %ch,%fs:0x6e(%rcx)
+ 351:	74 00                	je     353 <.debug_str+0x353>
+ 353:	5f                   	pop    %rdi
+ 354:	49                   	rex.WB
+ 355:	4f 5f                	rex.WRXB pop %r15
+ 357:	77 72                	ja     3cb <.debug_str+0x3cb>
+ 359:	69 74 65 5f 65 6e 64 	imul   $0x646e65,0x5f(%rbp,%riz,2),%esi
+ 360:	00 
+ 361:	5f                   	pop    %rdi
+ 362:	5f                   	pop    %rdi
+ 363:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 364:	66 66 36 34 5f       	data16 data16 ss xor $0x5f,%al
+ 369:	74 00                	je     36b <.debug_str+0x36b>
+ 36b:	70 69                	jo     3d6 <.debug_str+0x3d6>
+ 36d:	64 5f                	fs pop %rdi
+ 36f:	74 00                	je     371 <.debug_str+0x371>
+ 371:	5f                   	pop    %rdi
+ 372:	70 6f                	jo     3e3 <.debug_str+0x3e3>
+ 374:	73 00                	jae    376 <.debug_str+0x376>
+ 376:	5f                   	pop    %rdi
+ 377:	63 68 61             	movslq 0x61(%rax),%ebp
+ 37a:	69 6e 00 5f 5f 6f 66 	imul   $0x666f5f5f,0x0(%rsi),%ebp
+ 381:	66 5f                	pop    %di
+ 383:	74 00                	je     385 <.debug_str+0x385>
+ 385:	5f                   	pop    %rdi
+ 386:	49                   	rex.WB
+ 387:	4f 5f                	rex.WRXB pop %r15
+ 389:	62 61                	(bad)  
+ 38b:	63 6b 75             	movslq 0x75(%rbx),%ebp
+ 38e:	70 5f                	jo     3ef <.debug_str+0x3ef>
+ 390:	62 61                	(bad)  
+ 392:	73 65                	jae    3f9 <.debug_str+0x3f9>
+ 394:	00 73 74             	add    %dh,0x74(%rbx)
+ 397:	64 69 6e 00 5f 66 6c 	imul   $0x616c665f,%fs:0x0(%rsi),%ebp
+ 39e:	61 
+ 39f:	67 73 32             	addr32 jae 3d4 <.debug_str+0x3d4>
+ 3a2:	00 5f 6d             	add    %bl,0x6d(%rdi)
+ 3a5:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 3a6:	64 65 00 5f 49       	fs add %bl,%gs:0x49(%rdi)
+ 3ab:	4f 5f                	rex.WRXB pop %r15
+ 3ad:	72 65                	jb     414 <.debug_str+0x414>
+ 3af:	61                   	(bad)  
+ 3b0:	64 5f                	fs pop %rdi
+ 3b2:	62 61                	(bad)  
+ 3b4:	73 65                	jae    41b <.debug_str+0x41b>
+ 3b6:	00 5f 76             	add    %bl,0x76(%rdi)
+ 3b9:	74 61                	je     41c <.debug_str+0x41c>
+ 3bb:	62                   	(bad)  
+ 3bc:	6c                   	insb   (%dx),%es:(%rdi)
+ 3bd:	65 5f                	gs pop %rdi
+ 3bf:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 3c0:	66 66 73 65          	data16 data16 jae 429 <.debug_str+0x429>
+ 3c4:	74 00                	je     3c6 <.debug_str+0x3c6>
+ 3c6:	5f                   	pop    %rdi
+ 3c7:	49                   	rex.WB
+ 3c8:	4f 5f                	rex.WRXB pop %r15
+ 3ca:	73 61                	jae    42d <.debug_str+0x42d>
+ 3cc:	76 65                	jbe    433 <.debug_str+0x433>
+ 3ce:	5f                   	pop    %rdi
+ 3cf:	62 61                	(bad)  
+ 3d1:	73 65                	jae    438 <main+0x2b>
+ 3d3:	00 73 79             	add    %dh,0x79(%rbx)
+ 3d6:	73 5f                	jae    437 <main+0x2a>
+ 3d8:	65 72 72             	gs jb  44d <main+0x40>
+ 3db:	6c                   	insb   (%dx),%es:(%rdi)
+ 3dc:	69 73 74 00 6f 70 74 	imul   $0x74706f00,0x74(%rbx),%esi
+ 3e3:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 3e4:	70 74                	jo     45a <main+0x4d>
+ 3e6:	00 5f 66             	add    %bl,0x66(%rdi)
+ 3e9:	69 6c 65 6e 6f 00 46 	imul   $0x4946006f,0x6e(%rbp,%riz,2),%ebp
+ 3f0:	49 
+ 3f1:	4c                   	rex.WR
+ 3f2:	45 00 69 6e          	add    %r13b,0x6e(%r9)
+ 3f6:	70 75                	jo     46d <main+0x60>
+ 3f8:	74 6c                	je     466 <main+0x59>
+ 3fa:	69 6e 65 00 5f 49 4f 	imul   $0x4f495f00,0x65(%rsi),%ebp
+ 401:	5f                   	pop    %rdi
+ 402:	72 65                	jb     469 <main+0x5c>
+ 404:	61                   	(bad)  
+ 405:	64 5f                	fs pop %rdi
+ 407:	70 74                	jo     47d <main+0x70>
+ 409:	72 00                	jb     40b <.debug_str+0x40b>
+ 40b:	5f                   	pop    %rdi
+ 40c:	66 6c                	data16 insb (%dx),%es:(%rdi)
+ 40e:	61                   	(bad)  
+ 40f:	67 73 00             	addr32 jae 412 <.debug_str+0x412>
+ 412:	73 74                	jae    488 <main+0x7b>
+ 414:	64 6f                	outsl  %fs:(%rsi),(%dx)
+ 416:	75 74                	jne    48c <main+0x7f>
+ 418:	00 5f 49             	add    %bl,0x49(%rdi)
+ 41b:	4f 5f                	rex.WRXB pop %r15
+ 41d:	32 5f 31             	xor    0x31(%rdi),%bl
+ 420:	5f                   	pop    %rdi
+ 421:	73 74                	jae    497 <main+0x8a>
+ 423:	64 6f                	outsl  %fs:(%rsi),(%dx)
+ 425:	75 74                	jne    49b <main+0x8e>
+ 427:	5f                   	pop    %rdi
+ 428:	00 5f 49             	add    %bl,0x49(%rdi)
+ 42b:	4f 5f                	rex.WRXB pop %r15
+ 42d:	6c                   	insb   (%dx),%es:(%rdi)
+ 42e:	6f                   	outsl  %ds:(%rsi),(%dx)
+ 42f:	63 6b 5f             	movslq 0x5f(%rbx),%ebp
+ 432:	74 00                	je     434 <main+0x27>
+
+Disassembly of section .comment:
+
+0000000000000000 <.comment>:
+   0:	00 47 43             	add    %al,0x43(%rdi)
+   3:	43 3a 20             	rex.XB cmp (%r8),%spl
+   6:	28 55 62             	sub    %dl,0x62(%rbp)
+   9:	75 6e                	jne    79 <readline+0x31>
+   b:	74 75                	je     82 <readline+0x3a>
+   d:	20 37                	and    %dh,(%rdi)
+   f:	2e 33 2e             	xor    %cs:(%rsi),%ebp
+  12:	30 2d 32 37 75 62    	xor    %ch,0x62753732(%rip)        # 6275374a <main+0x6275333d>
+  18:	75 6e                	jne    88 <readline+0x40>
+  1a:	74 75                	je     91 <readline+0x49>
+  1c:	31 7e 31             	xor    %edi,0x31(%rsi)
+  1f:	38 2e                	cmp    %ch,(%rsi)
+  21:	30 34 29             	xor    %dh,(%rcx,%rbp,1)
+  24:	20 37                	and    %dh,(%rdi)
+  26:	2e 33 2e             	xor    %cs:(%rsi),%ebp
+  29:	30 00                	xor    %al,(%rax)
+
+Disassembly of section .eh_frame:
+
+0000000000000000 <.eh_frame>:
+   0:	14 00                	adc    $0x0,%al
+   2:	00 00                	add    %al,(%rax)
+   4:	00 00                	add    %al,(%rax)
+   6:	00 00                	add    %al,(%rax)
+   8:	01 7a 52             	add    %edi,0x52(%rdx)
+   b:	00 01                	add    %al,(%rcx)
+   d:	78 10                	js     1f <.eh_frame+0x1f>
+   f:	01 1b                	add    %ebx,(%rbx)
+  11:	0c 07                	or     $0x7,%al
+  13:	08 90 01 00 00 1c    	or     %dl,0x1c000001(%rax)
+  19:	00 00                	add    %al,(%rax)
+  1b:	00 1c 00             	add    %bl,(%rax,%rax,1)
+  1e:	00 00                	add    %al,(%rax)
+  20:	00 00                	add    %al,(%rax)
+  22:	00 00                	add    %al,(%rax)
+  24:	48 00 00             	rex.W add %al,(%rax)
+  27:	00 00                	add    %al,(%rax)
+  29:	41 0e                	rex.B (bad) 
+  2b:	10 86 02 43 0d 06    	adc    %al,0x60d4302(%rsi)
+  31:	02 43 0c             	add    0xc(%rbx),%al
+  34:	07                   	(bad)  
+  35:	08 00                	or     %al,(%rax)
+  37:	00 1c 00             	add    %bl,(%rax,%rax,1)
+  3a:	00 00                	add    %al,(%rax)
+  3c:	3c 00                	cmp    $0x0,%al
+  3e:	00 00                	add    %al,(%rax)
+  40:	00 00                	add    %al,(%rax)
+  42:	00 00                	add    %al,(%rax)
+  44:	97                   	xchg   %eax,%edi
+  45:	00 00                	add    %al,(%rax)
+  47:	00 00                	add    %al,(%rax)
+  49:	41 0e                	rex.B (bad) 
+  4b:	10 86 02 43 0d 06    	adc    %al,0x60d4302(%rsi)
+  51:	02 92 0c 07 08 00    	add    0x8070c(%rdx),%dl
+  57:	00 1c 00             	add    %bl,(%rax,%rax,1)
+  5a:	00 00                	add    %al,(%rax)
+  5c:	5c                   	pop    %rsp
+  5d:	00 00                	add    %al,(%rax)
+  5f:	00 00                	add    %al,(%rax)
+  61:	00 00                	add    %al,(%rax)
+  63:	00 3c 00             	add    %bh,(%rax,%rax,1)
+  66:	00 00                	add    %al,(%rax)
+  68:	00 41 0e             	add    %al,0xe(%rcx)
+  6b:	10 86 02 43 0d 06    	adc    %al,0x60d4302(%rsi)
+  71:	77 0c                	ja     7f <.eh_frame+0x7f>
+  73:	07                   	(bad)  
+  74:	08 00                	or     %al,(%rax)
+  76:	00 00                	add    %al,(%rax)
+  78:	1c 00                	sbb    $0x0,%al
+  7a:	00 00                	add    %al,(%rax)
+  7c:	7c 00                	jl     7e <.eh_frame+0x7e>
+  7e:	00 00                	add    %al,(%rax)
+  80:	00 00                	add    %al,(%rax)
+  82:	00 00                	add    %al,(%rax)
+  84:	76 00                	jbe    86 <.eh_frame+0x86>
+  86:	00 00                	add    %al,(%rax)
+  88:	00 41 0e             	add    %al,0xe(%rcx)
+  8b:	10 86 02 43 0d 06    	adc    %al,0x60d4302(%rsi)
+  91:	02 71 0c             	add    0xc(%rcx),%dh
+  94:	07                   	(bad)  
+  95:	08 00                	or     %al,(%rax)
+  97:	00 20                	add    %ah,(%rax)
+  99:	00 00                	add    %al,(%rax)
+  9b:	00 9c 00 00 00 00 00 	add    %bl,0x0(%rax,%rax,1)
+  a2:	00 00                	add    %al,(%rax)
+  a4:	d6                   	(bad)  
+  a5:	01 00                	add    %eax,(%rax)
+  a7:	00 00                	add    %al,(%rax)
+  a9:	41 0e                	rex.B (bad) 
+  ab:	10 86 02 43 0d 06    	adc    %al,0x60d4302(%rsi)
+  b1:	45 83 03 03          	rex.RB addl $0x3,(%r11)
+  b5:	cc                   	int3   
+  b6:	01 0c 07             	add    %ecx,(%rdi,%rax,1)
+  b9:	08 00                	or     %al,(%rax)
+  bb:	00 1c 00             	add    %bl,(%rax,%rax,1)
+  be:	00 00                	add    %al,(%rax)
+  c0:	c0 00 00             	rolb   $0x0,(%rax)
+  c3:	00 00                	add    %al,(%rax)
+  c5:	00 00                	add    %al,(%rax)
+  c7:	00 a6 00 00 00 00    	add    %ah,0x0(%rsi)
+  cd:	41 0e                	rex.B (bad) 
+  cf:	10 86 02 43 0d 06    	adc    %al,0x60d4302(%rsi)
+  d5:	02 a1 0c 07 08 00    	add    0x8070c(%rcx),%ah
+  db:	00 20                	add    %ah,(%rax)
+  dd:	00 00                	add    %al,(%rax)
+  df:	00 e0                	add    %ah,%al
+  e1:	00 00                	add    %al,(%rax)
+  e3:	00 00                	add    %al,(%rax)
+  e5:	00 00                	add    %al,(%rax)
+  e7:	00 e7                	add    %ah,%bh
+  e9:	01 00                	add    %eax,(%rax)
+  eb:	00 00                	add    %al,(%rax)
+  ed:	41 0e                	rex.B (bad) 
+  ef:	10 86 02 43 0d 06    	adc    %al,0x60d4302(%rsi)
+  f5:	03 e2                	add    %edx,%esp
+  f7:	01 0c 07             	add    %ecx,(%rdi,%rax,1)
+  fa:	08 00                	or     %al,(%rax)
+  fc:	00 00                	add    %al,(%rax)
+	...
+

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1541080525 source:/home/ziyad/Desktop/Lab2 mergesort/Lab02 mergesort/main.c
+	<stdio.h>
+	<stdlib.h>
+

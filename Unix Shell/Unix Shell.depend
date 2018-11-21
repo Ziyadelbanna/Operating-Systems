@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1538745827 source:c:\users\ziyad el banna\c\unix shell\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+
+1538745827 
+
+1539028955 source:/home/ziyad/Unix Shell/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<sys/wait.h>
+
+1539433129 source:/home/ziyad/Projects/Operating systems/Unix Shell/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<unistd.h>
+	<signal.h>
+	<sys/wait.h>
+	<sys/types.h>
+	<stdbool.h>
+
