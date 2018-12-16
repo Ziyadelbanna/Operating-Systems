@@ -1,4 +1,4 @@
-# Advanced operating systems topics for Computer science students
+# Advanced operating systems projects for Computer science students
 
 > _The main goal of this repo is to understand how operating systems work through learning the basic system fundamentals and know the internals of each unit to easily figure out its role and be able to implement it by yourself_
 
