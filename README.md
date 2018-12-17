@@ -1,6 +1,6 @@
 # Advanced operating systems projects for computer science students
 
-> _The main goal of this repo is to understand how operating systems work through learning the basic operating system fundamentals and understanding the role of each program to be able to implement it by yourself_
+> _The main goal of this repo is to understand how operating systems work through learning the basic operating system fundamentals and understanding the role of each program to be able to implement it by  yourself_
 
 
 ## Unix shell
