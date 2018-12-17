@@ -1,6 +1,6 @@
-# Advanced operating systems projects for Computer science students
+# Advanced operating systems projects for computer science students
 
-> _The main goal of this repo is to understand how operating systems work through learning the basic system fundamentals and know the internals of each unit to easily figure out its role and be able to implement it by yourself_
+> _The main goal of this repo is to understand how operating systems work through learning the basic operating system fundamentals and know the internals of each unit to easily figure out its role and be able to implement it by yourself_
 
 
 ## Unix shell
@@ -9,8 +9,7 @@
 >_The goal is to implement the unix shell command line interface by yourself and add extra features if possible_
 
 ## Synchronization
->_The goal is to apply your knowledge of threads synchronization on Bidirectional autonomous trolley manager using semaphores and mutexlocks_
-
+>_The goal is to apply your knowledge of threads synchronization on Bidirectional autonomous trolley manager by using semaphores and mutexlocks_
 
 ## Pthreads
 >_The goal is to understand how threads work through implementing famous algorithms as multi-threaded ones_
