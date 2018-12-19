@@ -5,8 +5,8 @@
 
 ## Unix shell
 
-**_Unix shell_: the command line interface in linux/unix operating system**
->_The goal is to implement the unix shell command line interface by yourself and add extra features if possible_
+**_Unix shell_: the command line interface in Linux/Unix operating system**
+>_The goal is to implement the Unix shell command line interface by yourself and add extra features if you want_
 
 ## Synchronization
 >_The goal is to apply your knowledge of threads synchronization on Bidirectional autonomous trolley manager by using semaphores and mutexlocks_
