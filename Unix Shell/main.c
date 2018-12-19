@@ -41,7 +41,6 @@ void readline(char inputline[])
 void remove_endofline(char inputline[])
 {
     int i=0;
-
     while (inputline[i] != '\n')
     {
         i++;
@@ -118,8 +117,7 @@ void Log (char *message)
 		LogCreated = true;
 	}
 	else
-		file = fopen("x.log", "a");
-
+	file = fopen("x.log", "a");
 	if (file == NULL) {
 		if (LogCreated)
 			LogCreated = false;
@@ -130,7 +128,6 @@ void Log (char *message)
 		fputs(message, file);
 		fclose(file);
 	}
-
 	if (file)
 		fclose(file);
 }
