@@ -9,9 +9,9 @@
 >_The goal is to implement the Unix shell command line interface by yourself and add extra features if you want_
 
 ## Synchronization
->_The goal is to apply your knowledge of threads synchronization on Bidirectional autonomous trolley manager by using semaphores and mutexlocks_
+>_The goal is to apply your knowledge of threads synchronization on Bidirectional autonomous trolley manager to control the resource (streets) yielding for the 4 trollies moving in the four directions: **North, South, East, West** by using semaphores and mutexlocks_
 
 ## Pthreads
->_The goal is to understand how threads work through implementing famous algorithms as multi-threaded ones_
+>_The goal is to understand how threads work through implementing popular algorithms as multi-threaded ones_
 
 
