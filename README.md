@@ -1,6 +1,6 @@
 # Advanced operating systems projects for computer engineering students
 
-> _The main goal of this repository is to understand how different operating systems work through learning the basic operating systems fundamentals and understanding the role of each module to be able to implement it by yourself_
+> _The main goal of this repository is to understand how different operating systems work through learning the basic operating systems fundamentals ,and understanding the role of each module to be able to implement it by yourself_
 
 
 ## Unix shell
