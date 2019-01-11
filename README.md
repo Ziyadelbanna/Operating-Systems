@@ -12,6 +12,6 @@
 >_The goal of this project is to apply your knowledge of threads synchronization on Bidirectional autonomous trolley manager to control the resource (streets) yielding for the 4 trollies moving in the four directions: **North, South, East, West** by using semaphores and mutexlocks_
 
 ## 3. Pthreads
->_The goal of this project is to understand how threads work through implementing popular algorithms as multi-threaded ones i.e: Quicksort, Matrix multiplication, etc. _
+>_The goal of this project is to understand how threads work through implementing popular algorithms as multi-threaded ones i.e: Quicksort, Matrix multiplication, etc._
 
 
