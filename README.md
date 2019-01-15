@@ -5,7 +5,7 @@
 
 ## 1. Unix shell
 
-**_Unix shell_ the command line interface in Linux/Unix operating system**
+**_Unix shell:_ the command line interface in Linux/Unix operating system**
 >_The goal here is to implement the Unix shell command line interface by yourself and add extra features if you want_
 
 ## 2. Synchronization
