@@ -6,7 +6,7 @@
 ## 1. Unix shell
 
 **_Unix shell:_ the command line interface in Linux/Unix operating system**
->_The goal here is to implement the Unix shell command line interface by yourself and add extra features if you want._
+>_The goal here is to implement the Unix shell command line interface by yourself and add extra features if you want_
 
 ## 2. Synchronization
 >_The goal of this project is to apply your knowledge of threads synchronization on Bidirectional autonomous trollies (carts) to control the resource i.e: streets yielding for the 4 trollies moving in the four directions: **North, South, East, West** by using semaphores and mutexlocks_
